@@ -2655,4 +2655,1079 @@ class Api2 extends CI_Controller
         $this->jsonResponse($response);
     }
 
+    /** 28. Talep Listesi - Tüm taleplerim ve filtreli talepler */
+    public function talepler()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Filter parametresi (1=Bekleyen, 2=Satış, 3=Bilgi Verildi, 4=Müşteri Memnuniyeti, 5=Dönüş Yapılacak, 6=Olumsuz, 7=Numara Hatalı, 8=Tekrar Aranacak, 999=Tümü)
+        $filter = isset($input_data['filter']) ? intval($input_data['filter']) : 999;
+        
+        // Admin kontrolü (is_admin parametresi varsa tüm talepleri göster)
+        $is_admin = isset($input_data['is_admin']) ? intval($input_data['is_admin']) : 0;
+        
+        // Model yükle
+        $this->load->model('Talep_yonlendirme_model');
+        
+        // Talep verilerini getir
+        if ($is_admin == 0) {
+            // Kullanıcıya yönlendirilen talepler
+            $data = $this->Talep_yonlendirme_model->get_all(["yonlenen_kullanici_id" => $kullanici_id]);
+        } else {
+            // Tüm talepler (admin)
+            $data = $this->Talep_yonlendirme_model->get_all([]);
+        }
+
+        // Filter uygula (999 ise tümü göster)
+        $filtered_data = [];
+        if ($filter != 999) {
+            foreach ($data as $talep) {
+                if ($talep->gorusme_sonuc_no == $filter) {
+                    $filtered_data[] = $talep;
+                }
+            }
+        } else {
+            $filtered_data = $data;
+        }
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($filtered_data as $talep) {
+            // Ürün adlarını decode et
+            $urun_adlari = !empty($talep->urun_adlari) ? explode(',', $talep->urun_adlari) : [];
+            
+            // Telefon numarası formatla
+            $telefon = !empty($talep->talep_cep_telefon) ? $talep->talep_cep_telefon : '';
+            if (!empty($talep->talep_yurtdisi_telefon)) {
+                $telefon = $talep->talep_yurtdisi_telefon;
+            }
+            
+            // Şehir/Ülke bilgisi
+            $lokasyon = '';
+            if ($talep->talep_ulke_id == 190) {
+                $lokasyon = $talep->sehir_adi ?? '';
+            } else {
+                $lokasyon = strtoupper($talep->ulke_adi ?? '');
+            }
+
+            $formatted_data[] = [
+                'talep_id' => intval($talep->talep_id),
+                'talep_yonlendirme_id' => intval($talep->talep_yonlendirme_id),
+                'musteri' => [
+                    'musteri_ad_soyad' => $talep->talep_musteri_ad_soyad ?? null,
+                    'isletme_adi' => ($talep->talep_isletme_adi && $talep->talep_isletme_adi != '#NULL#') ? $talep->talep_isletme_adi : null,
+                    'cep_telefon' => $telefon,
+                    'sabit_telefon' => $talep->talep_sabit_telefon ?? null,
+                    'yurtdisi_telefon' => $talep->talep_yurtdisi_telefon ?? null
+                ],
+                'urunler' => $urun_adlari,
+                'lokasyon' => [
+                    'sehir_adi' => $talep->sehir_adi ?? null,
+                    'ulke_adi' => $talep->ulke_adi ?? null,
+                    'ulke_id' => !empty($talep->talep_ulke_id) ? intval($talep->talep_ulke_id) : null,
+                    'lokasyon_text' => $lokasyon
+                ],
+                'yonlendirme' => [
+                    'yonlendiren_kullanici_id' => intval($talep->yonlendiren_kullanici_id ?? 0),
+                    'yonlendiren_ad_soyad' => $talep->yonlendiren_ad_soyad ?? null,
+                    'yonlenen_kullanici_id' => intval($talep->yonlenen_kullanici_id ?? 0),
+                    'yonlenen_ad_soyad' => $talep->yonlenen_ad_soyad ?? null,
+                    'yonlendirme_tarihi' => $talep->yonlendirme_tarihi ?? null,
+                    'yonlendirme_tarihi_formatted' => $talep->yonlendirme_tarihi ? date('d.m.Y H:i', strtotime($talep->yonlendirme_tarihi)) : null
+                ],
+                'gorusme' => [
+                    'gorusme_sonuc_no' => !empty($talep->gorusme_sonuc_no) ? intval($talep->gorusme_sonuc_no) : null,
+                    'gorusme_sonuc_adi' => $talep->talep_sonuc_adi ?? null,
+                    'gorusme_sonuc_renk' => $talep->talep_sonuc_renk ?? null,
+                    'gorusme_sonuc_ikon' => $talep->talep_sonuc_ikon ?? null,
+                    'gorusme_detay' => $talep->gorusme_detay ?? null,
+                    'gorusme_puan' => !empty($talep->gorusme_puan) ? intval($talep->gorusme_puan) : null
+                ],
+                'talep_kayit_tarihi' => $talep->talep_kayit_tarihi ?? null,
+                'talep_kayit_tarihi_formatted' => $talep->talep_kayit_tarihi ? date('d.m.Y H:i', strtotime($talep->talep_kayit_tarihi)) : null,
+                'talep_uyari_notu' => $talep->talep_uyari_notu ?? null,
+                'talep_fiyat_teklifi' => $talep->talep_fiyat_teklifi ?? null,
+                'kullaniciya_aktarildi' => !empty($talep->kullaniciya_aktarildi) ? intval($talep->kullaniciya_aktarildi) : 0
+            ];
+        }
+
+        // İstatistikler
+        $istatistikler = [
+            'bekleyen' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 1; })),
+            'satis' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 2; })),
+            'bilgi_verildi' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 3; })),
+            'musteri_memnuniyeti' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 4; })),
+            'donus_yapilacak' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 5; })),
+            'olumsuz' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 6; })),
+            'numara_hatali' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 7; })),
+            'tekrar_aranacak' => count(array_filter($data, function($t) { return $t->gorusme_sonuc_no == 8; })),
+            'toplam' => count($data)
+        ];
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Talepler başarıyla getirildi.',
+            'data' => $formatted_data,
+            'istatistikler' => $istatistikler,
+            'filter' => $filter,
+            'filter_text' => $this->_getFilterText($filter),
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** Filter text helper */
+    private function _getFilterText($filter)
+    {
+        $filters = [
+            1 => 'Bekleyen Talepler',
+            2 => 'Satış Talepler',
+            3 => 'Bilgi Verildi Talepler',
+            4 => 'Müşteri Memnuniyeti Talepler',
+            5 => 'Dönüş Yapılacak Talepler',
+            6 => 'Olumsuz Talepler',
+            7 => 'Numara Hatalı Talepler',
+            8 => 'Tekrar Aranacak Talepler',
+            999 => 'Tüm Taleplerim'
+        ];
+        return $filters[$filter] ?? 'Tüm Taleplerim';
+    }
+
+    /** 29. Talep Ekle */
+    public function talep_ekle()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Zorunlu alanlar
+        if (empty($input_data['talep_musteri_ad_soyad']) || empty($input_data['talep_cep_telefon'])) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'talep_musteri_ad_soyad ve talep_cep_telefon alanları gereklidir.'
+            ], 400);
+        }
+
+        // 3 günlük kontrol - aynı telefon numarası ile son 3 gün içinde talep var mı?
+        $telefon = str_replace(' ', '', $input_data['talep_cep_telefon']);
+        $this->db->select('talepler.*');
+        $this->db->from('talepler');
+        $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
+        $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));
+        $this->db->where('talepler.talep_cep_telefon', $telefon);
+        $kontrol_query = $this->db->get();
+        
+        if ($kontrol_query->num_rows() > 0) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => $telefon . ' nolu iletişim bilgisiyle oluşturulmuş ve 3 günlük görüşme sürecinde olan bir kayıt bulunmaktadır. 3 gün içinde tekrar talep kaydı oluşturulamaz.'
+            ], 400);
+        }
+
+        // Model yükle
+        $this->load->model('Talep_model');
+        
+        // Talep verilerini hazırla
+        $talep_data = [
+            'talep_musteri_ad_soyad' => strip_tags(trim($input_data['talep_musteri_ad_soyad'])),
+            'talep_isletme_adi' => !empty($input_data['talep_isletme_adi']) ? strip_tags(trim($input_data['talep_isletme_adi'])) : '#NULL#',
+            'talep_cep_telefon' => $telefon,
+            'talep_sabit_telefon' => !empty($input_data['talep_sabit_telefon']) ? str_replace(' ', '', $input_data['talep_sabit_telefon']) : null,
+            'talep_fiyat_teklifi' => !empty($input_data['talep_fiyat_teklifi']) ? strip_tags(trim($input_data['talep_fiyat_teklifi'])) : null,
+            'talep_urun_id' => !empty($input_data['talep_urun_id']) ? json_encode($input_data['talep_urun_id']) : json_encode([]),
+            'talep_sehir_no' => !empty($input_data['talep_sehir_no']) ? intval($input_data['talep_sehir_no']) : 0,
+            'talep_ilce_no' => !empty($input_data['talep_ilce_no']) ? intval($input_data['talep_ilce_no']) : 0,
+            'talep_ulke_id' => !empty($input_data['talep_ulke_id']) ? intval($input_data['talep_ulke_id']) : 190,
+            'talep_kaynak_no' => !empty($input_data['talep_kaynak_no']) ? intval($input_data['talep_kaynak_no']) : 1,
+            'talep_uyari_notu' => !empty($input_data['talep_uyari_notu']) ? strip_tags(trim($input_data['talep_uyari_notu'])) : null,
+            'talep_kullanilan_cihaz_id' => !empty($input_data['talep_kullanilan_cihaz_id']) ? intval($input_data['talep_kullanilan_cihaz_id']) : 0,
+            'talep_kullanilan_cihaz_aciklama' => !empty($input_data['talep_kullanilan_cihaz_aciklama']) ? strip_tags(trim($input_data['talep_kullanilan_cihaz_aciklama'])) : null,
+            'talep_sorumlu_kullanici_id' => $kullanici_id,
+            'talep_kayit_tarihi' => date('Y-m-d H:i:s'),
+            'talep_guncelleme_tarihi' => date('Y-m-d H:i:s'),
+            'talep_yonlendirildi_mi' => 0,
+            'talep_reklamlardan_gelen_mi' => 0
+        ];
+
+        // Özel kullanıcılar için yurtdışı telefon
+        if (in_array($kullanici_id, [1, 1331, 1341])) {
+            $talep_data['talep_yurtdisi_telefon'] = !empty($input_data['talep_yurtdisi_telefon']) ? strip_tags(trim($input_data['talep_yurtdisi_telefon'])) : null;
+        }
+
+        // Talep kaydını yap
+        $this->Talep_model->insert($talep_data);
+        $talep_id = $this->db->insert_id();
+
+        if (!$talep_id) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Talep kaydı oluşturulurken bir hata oluştu.'
+            ], 500);
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Talep başarıyla oluşturuldu.',
+            'talep_id' => $talep_id,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 30. Talep Güncelle (Görüşme Sonucu) */
+    public function talep_guncelle()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        $talep_yonlendirme_id = !empty($input_data['talep_yonlendirme_id']) ? intval($input_data['talep_yonlendirme_id']) : null;
+        
+        if (empty($kullanici_id) || empty($talep_yonlendirme_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) ve talep_yonlendirme_id gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Talep yönlendirme kontrolü
+        $this->load->model('Talep_yonlendirme_model');
+        $talep_yonlendirme = $this->Talep_yonlendirme_model->get_by_id($talep_yonlendirme_id);
+        
+        if (!$talep_yonlendirme || empty($talep_yonlendirme)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Talep yönlendirme kaydı bulunamadı.'
+            ], 404);
+        }
+
+        $yonlendirme_data = $talep_yonlendirme[0];
+        
+        // Yetki kontrolü - sadece yönlendirilen kullanıcı güncelleyebilir
+        if ($yonlendirme_data->yonlenen_kullanici_id != $kullanici_id) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Bu talebi güncelleme yetkiniz yoktur. Sadece size yönlendirilen talepleri güncelleyebilirsiniz.'
+            ], 403);
+        }
+
+        // Görüşme sonucu zorunlu
+        if (empty($input_data['gorusme_sonuc_no'])) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'gorusme_sonuc_no gereklidir.'
+            ], 400);
+        }
+
+        // Satış sonucu için müşteri ad soyad kontrolü
+        if (intval($input_data['gorusme_sonuc_no']) == 2) {
+            $musteri_ad = strip_tags(trim($input_data['talep_musteri_ad_soyad'] ?? ''));
+            if (str_word_count($musteri_ad) === 1) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Ad Soyad Geçersiz. Soyad Bilgisi Zorunludur.'
+                ], 400);
+            }
+            
+            // Geçersiz kelime kontrolü
+            $kucuk_metin = mb_strtolower($musteri_ad, 'UTF-8');
+            $gecersiz_kelimeler = ['hanım', 'hanim', 'bey', 'by', 'hanm', 'hnm', 'hnım', 'hnim', 'isim', 'hanımm', 'hanimm', 'haanim', 'haanım', 'beyi', 'belirtilmedi'];
+            foreach ($gecersiz_kelimeler as $kelime) {
+                if (strpos($kucuk_metin, $kelime) !== false) {
+                    $this->jsonResponse([
+                        'status'  => 'error',
+                        'message' => 'Müşteri Ad Soyad İçerisinde (Hanım, Bey, Hanim, By, vb.) ifadelerine yer verilemez.'
+                    ], 400);
+                }
+            }
+        }
+
+        // Talep güncelleme verileri
+        $talep_data = [];
+        if (!empty($input_data['talep_musteri_ad_soyad'])) {
+            $talep_data['talep_musteri_ad_soyad'] = strip_tags(trim($input_data['talep_musteri_ad_soyad']));
+        }
+        if (isset($input_data['talep_isletme_adi'])) {
+            $talep_data['talep_isletme_adi'] = !empty($input_data['talep_isletme_adi']) ? strip_tags(trim($input_data['talep_isletme_adi'])) : '#NULL#';
+        }
+        if (!empty($input_data['talep_fiyat_teklifi'])) {
+            $talep_data['talep_fiyat_teklifi'] = strip_tags(trim($input_data['talep_fiyat_teklifi']));
+        }
+        if (!empty($input_data['talep_urun_id'])) {
+            $talep_data['talep_urun_id'] = json_encode($input_data['talep_urun_id']);
+        }
+        if (!empty($input_data['talep_uyari_notu'])) {
+            $talep_data['talep_uyari_notu'] = strip_tags(trim($input_data['talep_uyari_notu']));
+        }
+        $talep_data['talep_guncelleme_tarihi'] = date('Y-m-d H:i:s');
+
+        // Talep kaydını güncelle
+        if (!empty($talep_data)) {
+            $this->load->model('Talep_model');
+            $this->Talep_model->update($yonlendirme_data->talep_no, $talep_data);
+        }
+
+        // Yönlendirme güncelleme verileri
+        $yonlendirme_update = [
+            'gorusme_detay' => !empty($input_data['gorusme_detay']) ? strip_tags(trim($input_data['gorusme_detay'])) : null,
+            'gorusme_sonuc_no' => intval($input_data['gorusme_sonuc_no']),
+            'gorusme_puan' => !empty($input_data['gorusme_puan']) ? intval($input_data['gorusme_puan']) : null,
+            'gorusme_sonuc_guncelleme_tarihi' => date('Y-m-d H:i:s'),
+            'rut_gorusmesi_mi' => !empty($input_data['rut_gorusmesi_mi']) ? intval($input_data['rut_gorusmesi_mi']) : 0
+        ];
+
+        // Eski durum bilgilerini kaydet
+        $yonlendirme_update['eski_gorusme_sonuc_no'] = $yonlendirme_data->gorusme_sonuc_no;
+        $yonlendirme_update['eski_gorusme_sonuc_guncelleme_tarihi'] = !empty($yonlendirme_data->gorusme_sonuc_guncelleme_tarihi) 
+            ? $yonlendirme_data->gorusme_sonuc_guncelleme_tarihi 
+            : date('Y-m-d H:i:s');
+
+        // Yönlendirme kaydını güncelle
+        $this->Talep_yonlendirme_model->update($talep_yonlendirme_id, $yonlendirme_update);
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Talep başarıyla güncellendi.',
+            'talep_yonlendirme_id' => $talep_yonlendirme_id,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 31. Talep Detay */
+    public function talep_detay()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        $talep_id = !empty($input_data['talep_id']) ? intval($input_data['talep_id']) : null;
+        
+        if (empty($kullanici_id) || empty($talep_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) ve talep_id gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Talep bilgisini getir
+        $this->load->model('Talep_model');
+        $talep = $this->Talep_model->get_by_id($talep_id);
+        
+        if (!$talep || empty($talep)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Talep bulunamadı.'
+            ], 404);
+        }
+
+        $talep_data = $talep[0];
+
+        // Yönlendirmeleri getir
+        $this->load->model('Talep_yonlendirme_model');
+        $yonlendirmeler = $this->Talep_yonlendirme_model->get_all_by_talep_no(["talep_no" => $talep_id]);
+
+        // Ürün adlarını decode et
+        $urun_adlari = [];
+        if (!empty($talep_data->talep_urun_id)) {
+            $urun_ids = json_decode($talep_data->talep_urun_id, true);
+            if (is_array($urun_ids)) {
+                foreach ($urun_ids as $urun_id) {
+                    $urun = $this->db->where('urun_id', $urun_id)->get('urunler')->row();
+                    if ($urun) {
+                        $urun_adlari[] = $urun->urun_adi;
+                    }
+                }
+            }
+        }
+
+        // Yönlendirmeleri formatla
+        $formatted_yonlendirmeler = [];
+        foreach ($yonlendirmeler as $yon) {
+            $formatted_yonlendirmeler[] = [
+                'talep_yonlendirme_id' => intval($yon->talep_yonlendirme_id),
+                'yonlendiren' => [
+                    'kullanici_id' => intval($yon->yonlendiren_kullanici_id ?? 0),
+                    'ad_soyad' => $yon->yonlendiren_ad_soyad ?? null
+                ],
+                'yonlenen' => [
+                    'kullanici_id' => intval($yon->yonlenen_kullanici_id ?? 0),
+                    'ad_soyad' => $yon->yonlenen_ad_soyad ?? null
+                ],
+                'gorusme_sonuc_no' => !empty($yon->gorusme_sonuc_no) ? intval($yon->gorusme_sonuc_no) : null,
+                'gorusme_sonuc_adi' => $yon->talep_sonuc_adi ?? null,
+                'gorusme_detay' => $yon->gorusme_detay ?? null,
+                'yonlendirme_tarihi' => $yon->yonlendirme_tarihi ?? null,
+                'yonlendirme_tarihi_formatted' => $yon->yonlendirme_tarihi ? date('d.m.Y H:i', strtotime($yon->yonlendirme_tarihi)) : null
+            ];
+        }
+
+        // Talep kaynağı bilgisi
+        $talep_kaynak = null;
+        if (!empty($talep_data->talep_kaynak_no)) {
+            $kaynak = $this->db->where('talep_kaynak_id', $talep_data->talep_kaynak_no)->get('talep_kaynaklari')->row();
+            if ($kaynak) {
+                $talep_kaynak = [
+                    'talep_kaynak_id' => intval($kaynak->talep_kaynak_id),
+                    'talep_kaynak_adi' => $kaynak->talep_kaynak_adi ?? null,
+                    'talep_kaynak_renk' => $kaynak->talep_kaynak_renk ?? null
+                ];
+            }
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Talep detayları başarıyla getirildi.',
+            'data' => [
+                'talep_id' => intval($talep_data->talep_id),
+                'musteri' => [
+                    'musteri_ad_soyad' => $talep_data->talep_musteri_ad_soyad ?? null,
+                    'isletme_adi' => ($talep_data->talep_isletme_adi && $talep_data->talep_isletme_adi != '#NULL#') ? $talep_data->talep_isletme_adi : null,
+                    'cep_telefon' => $talep_data->talep_cep_telefon ?? null,
+                    'sabit_telefon' => $talep_data->talep_sabit_telefon ?? null,
+                    'yurtdisi_telefon' => $talep_data->talep_yurtdisi_telefon ?? null
+                ],
+                'urunler' => $urun_adlari,
+                'talep_kaynak' => $talep_kaynak,
+                'talep_fiyat_teklifi' => $talep_data->talep_fiyat_teklifi ?? null,
+                'talep_uyari_notu' => $talep_data->talep_uyari_notu ?? null,
+                'talep_kayit_tarihi' => $talep_data->talep_kayit_tarihi ?? null,
+                'talep_kayit_tarihi_formatted' => $talep_data->talep_kayit_tarihi ? date('d.m.Y H:i', strtotime($talep_data->talep_kayit_tarihi)) : null,
+                'yonlendirmeler' => $formatted_yonlendirmeler
+            ],
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 32. Talep Yönlendir */
+    public function talep_yonlendir()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        $talep_id = !empty($input_data['talep_id']) ? intval($input_data['talep_id']) : null;
+        $yonlenen_kullanici_id = !empty($input_data['yonlenen_kullanici_id']) ? intval($input_data['yonlenen_kullanici_id']) : null;
+        
+        if (empty($kullanici_id) || empty($talep_id) || empty($yonlenen_kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id), talep_id ve yonlenen_kullanici_id gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Talep kontrolü
+        $this->load->model('Talep_model');
+        $talep = $this->Talep_model->get_by_id($talep_id);
+        
+        if (!$talep || empty($talep)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Talep bulunamadı.'
+            ], 404);
+        }
+
+        // 3 günlük kontrol
+        $telefon = str_replace(' ', '', $talep[0]->talep_cep_telefon);
+        $this->db->select('talepler.*');
+        $this->db->from('talepler');
+        $this->db->join('talep_yonlendirmeler', 'talep_yonlendirmeler.talep_no = talepler.talep_id');
+        $this->db->where('talep_yonlendirmeler.yonlendirme_tarihi >=', date('Y-m-d', strtotime('-3 days')));
+        $this->db->where('talepler.talep_cep_telefon', $telefon);
+        $kontrol_query = $this->db->get();
+        
+        if ($kontrol_query->num_rows() > 0) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => $telefon . ' nolu iletişim bilgisiyle oluşturulmuş ve 3 günlük görüşme sürecinde olan bir kayıt bulunmaktadır.'
+            ], 400);
+        }
+
+        // Yönlendirme kaydı oluştur
+        $this->load->model('Talep_yonlendirme_model');
+        $yonlendirme_data = [
+            'talep_no' => $talep_id,
+            'yonlenen_kullanici_id' => $yonlenen_kullanici_id,
+            'yonlendiren_kullanici_id' => $kullanici_id,
+            'yonlendirme_tarihi' => date('Y-m-d H:i:s'),
+            'gorusme_sonuc_no' => 1, // Bekleyen
+            'rut_gorusmesi_mi' => 0
+        ];
+        
+        $this->Talep_yonlendirme_model->insert($yonlendirme_data);
+        $yonlendirme_id = $this->db->insert_id();
+
+        // Talep yönlendirildi olarak işaretle
+        $this->Talep_model->update($talep_id, ['talep_yonlendirildi_mi' => 1]);
+
+        // Yönlenen kullanıcıya SMS gönder
+        $yonlenen_kullanici = $this->db->where('kullanici_id', $yonlenen_kullanici_id)->get('kullanicilar')->row();
+        if ($yonlenen_kullanici && !empty($yonlenen_kullanici->kullanici_bireysel_iletisim_no)) {
+            $this->load->helper('site');
+            if (function_exists('sendSmsData')) {
+                sendSmsData(
+                    $yonlenen_kullanici->kullanici_bireysel_iletisim_no,
+                    "Sn. " . $yonlenen_kullanici->kullanici_ad_soyad . " " . date("d.m.Y H:i") . " tarihinde tarafınıza yönlendirilmiş yeni müşteri talebiniz bulunmaktadır. Talebi görüntülemek için : https://ugbusiness.com.tr/bekleyen-talepler"
+                );
+            }
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Talep başarıyla yönlendirildi.',
+            'talep_yonlendirme_id' => $yonlendirme_id,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 33. Rut Listesi */
+    public function rut_listesi()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Controller Referansı: Rut.php::rut_tanimlari() (satır 21-34)
+        // Model: rut_tanimlari tablosu
+        $query = $this->db
+            ->where(["rut_kullanici_id" => $kullanici_id])
+            ->select("rut_tanimlari.*, kullanicilar.*, sehirler.sehir_adi, araclar.*")
+            ->from('rut_tanimlari')
+            ->order_by("rut_tanimlari.rut_tanim_id", "asc")
+            ->join('kullanicilar', 'kullanicilar.kullanici_id = rut_tanimlari.rut_kullanici_id')
+            ->join('sehirler', 'sehirler.sehir_id = rut_tanimlari.rut_sehir_id')
+            ->join('araclar', 'araclar.arac_id = rut_tanimlari.rut_arac_id', 'left')
+            ->get();
+
+        $rut_tanimlari = $query->result();
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($rut_tanimlari as $rut) {
+            // İlçe bilgilerini decode et
+            $ilceler = [];
+            if (!empty($rut->rut_ilce_bilgisi)) {
+                $ilce_ids = json_decode($rut->rut_ilce_bilgisi, true);
+                if (is_array($ilce_ids)) {
+                    foreach ($ilce_ids as $ilce_id) {
+                        $ilce = $this->db->where('ilce_id', $ilce_id)->get('ilceler')->row();
+                        if ($ilce) {
+                            $ilceler[] = [
+                                'ilce_id' => intval($ilce->ilce_id),
+                                'ilce_adi' => $ilce->ilce_adi ?? null
+                            ];
+                        }
+                    }
+                }
+            }
+
+            $formatted_data[] = [
+                'rut_tanim_id' => intval($rut->rut_tanim_id),
+                'kullanici' => [
+                    'kullanici_id' => intval($rut->rut_kullanici_id),
+                    'kullanici_ad_soyad' => $rut->kullanici_ad_soyad ?? null
+                ],
+                'sehir' => [
+                    'sehir_id' => !empty($rut->rut_sehir_id) ? intval($rut->rut_sehir_id) : null,
+                    'sehir_adi' => $rut->sehir_adi ?? null
+                ],
+                'ilceler' => $ilceler,
+                'arac' => [
+                    'arac_id' => !empty($rut->rut_arac_id) ? intval($rut->rut_arac_id) : null,
+                    'arac_plaka' => $rut->arac_plaka ?? null,
+                    'arac_marka' => $rut->arac_marka ?? null,
+                    'arac_model' => $rut->arac_model ?? null
+                ],
+                'rut_baslangic_tarihi' => $rut->rut_baslangic_tarihi ?? null,
+                'rut_baslangic_tarihi_formatted' => $rut->rut_baslangic_tarihi ? date('d.m.Y', strtotime($rut->rut_baslangic_tarihi)) : null,
+                'rut_bitis_tarihi' => $rut->rut_bitis_tarihi ?? null,
+                'rut_bitis_tarihi_formatted' => $rut->rut_bitis_tarihi ? date('d.m.Y', strtotime($rut->rut_bitis_tarihi)) : null,
+                'rut_satisci_durum' => !empty($rut->rut_satisci_durum) ? intval($rut->rut_satisci_durum) : 0,
+                'rut_satisci_baslatma_tarihi' => $rut->rut_satisci_baslatma_tarihi ?? null,
+                'rut_satisci_baslatma_km' => !empty($rut->rut_satisci_baslatma_km) ? intval($rut->rut_satisci_baslatma_km) : null,
+                'rut_satisci_bitis_tarihi' => $rut->rut_satisci_bitis_tarihi ?? null,
+                'rut_satisci_bitis_km' => !empty($rut->rut_satisci_bitis_km) ? intval($rut->rut_satisci_bitis_km) : null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Rut listesi başarıyla getirildi.',
+            'data' => $formatted_data,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 34. Kara Liste */
+    public function kara_liste()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        
+        if (empty($kullanici_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Controller Referansı: Musteri.php::karaliste_view() (satır 529-544)
+        // Model: kara_liste tablosu
+        // View Referansı: application/views/musteri/karaliste/main_content.php
+
+        // POST ise kara listeye ekle
+        if ($method === 'POST' && !empty($input_data['kara_liste_iletisim_numarasi'])) {
+            $telefon = str_replace(' ', '', $input_data['kara_liste_iletisim_numarasi']);
+            
+            // Zaten var mı kontrol et
+            $kontrol = $this->db->where('kara_liste_kullanici_id', $kullanici_id)
+                               ->where('kara_liste_iletisim_numarasi', $telefon)
+                               ->get('kara_liste')
+                               ->row();
+            
+            if ($kontrol) {
+                $this->jsonResponse([
+                    'status'  => 'error',
+                    'message' => 'Bu numara zaten kara listenizde bulunmaktadır.'
+                ], 400);
+            }
+
+            $kara_liste_data = [
+                'kara_liste_iletisim_numarasi' => $telefon,
+                'kara_liste_kullanici_id' => $kullanici_id
+            ];
+            
+            $this->db->insert('kara_liste', $kara_liste_data);
+            $kara_liste_id = $this->db->insert_id();
+
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Numara kara listeye eklendi.',
+                'kara_liste_id' => $kara_liste_id,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        // GET ise kara listeyi getir
+        $kara_liste = $this->db
+            ->where("kara_liste_kullanici_id", $kullanici_id)
+            ->join("kullanicilar", "kullanici_id = kara_liste_kullanici_id")
+            ->select("kullanicilar.kullanici_ad_soyad, kara_liste.*")
+            ->from("kara_liste")
+            ->order_by('kara_liste_id', 'DESC')
+            ->get()
+            ->result();
+
+        $formatted_data = [];
+        foreach ($kara_liste as $kayit) {
+            $formatted_data[] = [
+                'kara_liste_id' => intval($kayit->kara_liste_id),
+                'iletisim_numarasi' => $kayit->kara_liste_iletisim_numarasi ?? null,
+                'kullanici' => [
+                    'kullanici_id' => intval($kayit->kara_liste_kullanici_id),
+                    'kullanici_ad_soyad' => $kayit->kullanici_ad_soyad ?? null
+                ],
+                'kayit_tarihi' => $kayit->kara_liste_kayit_tarihi ?? null,
+                'kayit_tarihi_formatted' => $kayit->kara_liste_kayit_tarihi ? date('d.m.Y H:i', strtotime($kayit->kara_liste_kayit_tarihi)) : null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Kara liste başarıyla getirildi.',
+            'data' => $formatted_data,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 35. Kara Liste Sil */
+    public function kara_liste_sil()
+    {
+        $method = $this->input->method(true);
+        
+        // Sadece POST isteklerini kabul et
+        if ($method !== 'POST') {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST metodu kabul edilir.'
+            ], 405);
+        }
+
+        // JSON input al
+        $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
+        
+        // Kullanıcı ID'sini al
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        $kara_liste_id = !empty($input_data['kara_liste_id']) ? intval($input_data['kara_liste_id']) : null;
+        
+        if (empty($kullanici_id) || empty($kara_liste_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'kullanici_id (veya user_id) ve kara_liste_id gereklidir.'
+            ], 400);
+        }
+
+        // Kullanıcı kontrolü
+        $kullanici = $this->db->where('kullanici_id', $kullanici_id)
+                              ->where('kullanici_aktif', 1)
+                              ->get('kullanicilar')
+                              ->row();
+
+        if (!$kullanici) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz kullanıcı ID veya kullanıcı aktif değil.'
+            ], 404);
+        }
+
+        // Kara liste kaydı kontrolü - sadece kendi kaydını silebilir
+        $kara_liste = $this->db->where('kara_liste_id', $kara_liste_id)
+                              ->where('kara_liste_kullanici_id', $kullanici_id)
+                              ->get('kara_liste')
+                              ->row();
+
+        if (!$kara_liste) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Kara liste kaydı bulunamadı veya bu kayıt size ait değil.'
+            ], 404);
+        }
+
+        // Sil
+        $this->db->where('kara_liste_id', $kara_liste_id)
+                 ->where('kara_liste_kullanici_id', $kullanici_id)
+                 ->delete('kara_liste');
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Kara liste kaydı başarıyla silindi.',
+            'kara_liste_id' => $kara_liste_id,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 36. Talep Kaynakları */
+    public function talep_kaynaklari()
+    {
+        // GET
+        $kaynaklar = $this->db->order_by('talep_kaynak_id', 'ASC')->get('talep_kaynaklari')->result();
+        
+        $formatted_data = [];
+        foreach ($kaynaklar as $kaynak) {
+            $formatted_data[] = [
+                'talep_kaynak_id' => intval($kaynak->talep_kaynak_id),
+                'talep_kaynak_adi' => $kaynak->talep_kaynak_adi ?? null,
+                'talep_kaynak_renk' => $kaynak->talep_kaynak_renk ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Talep kaynakları başarıyla getirildi.',
+            'data' => $formatted_data,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 37. Talep Sonuçları */
+    public function talep_sonuclari()
+    {
+        // GET
+        $sonuclar = $this->db->order_by('talep_sonuc_id', 'ASC')->get('talep_sonuclar')->result();
+        
+        $formatted_data = [];
+        foreach ($sonuclar as $sonuc) {
+            $formatted_data[] = [
+                'talep_sonuc_id' => intval($sonuc->talep_sonuc_id),
+                'talep_sonuc_adi' => $sonuc->talep_sonuc_adi ?? null,
+                'talep_sonuc_renk' => $sonuc->talep_sonuc_renk ?? null,
+                'talep_sonuc_ikon' => $sonuc->talep_sonuc_ikon ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Talep sonuçları başarıyla getirildi.',
+            'data' => $formatted_data,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 38. Fiyat Limitleri Listesi (Ürün Bazlı) */
+    public function fiyat_limitleri_listesi()
+    {
+        $method = $this->input->method(true);
+        
+        // GET veya POST isteklerini kabul et
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Ürün ID'sini al
+        $urun_id = !empty($input_data['urun_id']) ? intval($input_data['urun_id']) : null;
+        
+        if (empty($urun_id)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'urun_id gereklidir.'
+            ], 400);
+        }
+
+        // Ürün kontrolü
+        $urun = $this->db->where('urun_id', $urun_id)->get('urunler')->row();
+        
+        if (!$urun) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Geçersiz ürün ID.'
+            ], 404);
+        }
+
+        // Controller Referansı: Urun.php::satici_limit() (satır 113-163)
+        // View Referansı: application/views/urun/satici_limitler/main_content.php
+
+        // Fiyat listesi hesapla
+        $fiyat_listesi = [];
+        if ($urun->urun_pesinat_artis_ust_fiyati != 0 && $urun->urun_pesinat_fiyati != 0) {
+            for ($p = $urun->urun_pesinat_fiyati; $p <= $urun->urun_pesinat_artis_ust_fiyati; $p += $urun->pesinat_artis_aralik) {
+                for ($v = 20; $v >= 1; $v--) {
+                    if ($v % 2 == 1 && $v != 1) continue;
+                    
+                    $senet_result = (($urun->urun_satis_fiyati - $p) * (($urun->urun_vade_farki / 12) * $v) + ($urun->urun_satis_fiyati - $p));
+                    
+                    $fiyat_listesi[] = [
+                        'pesinat_fiyati' => floatval($p),
+                        'vade' => intval($v),
+                        'senet' => floatval($senet_result),
+                        'aylik_taksit_tutar' => floatval($senet_result / $v),
+                        'toplam_dip_fiyat' => floatval($senet_result + $p),
+                        'toplam_dip_fiyat_yuvarlanmis' => floatval(floor(($senet_result + $p) / 5000) * 5000),
+                        'toplam_dip_fiyat_yuvarlanmis_satisci' => floatval((floor(($senet_result + $p) / 5000) * 5000) - ($urun->satis_pazarlik_payi))
+                    ];
+                }
+            }
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Fiyat limitleri başarıyla getirildi.',
+            'urun' => [
+                'urun_id' => intval($urun->urun_id),
+                'urun_adi' => $urun->urun_adi ?? null
+            ],
+            'fiyat_listesi' => $fiyat_listesi,
+            'toplam_kayit' => count($fiyat_listesi),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
