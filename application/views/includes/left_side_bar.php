@@ -567,11 +567,6 @@ body.sidebar-collapse #main-sidebar .sidebar {
   }
 }
 
-/* Desktop - Hide close button */
-#main-sidebar .sidebar-close-button {
-  display: none !important;
-}
-
 /* Mobile devices (max-width: 767.98px) - Compatible with AdminLTE */
 @media (max-width: 767.98px) {
   #main-sidebar {
@@ -601,45 +596,12 @@ body.sidebar-collapse #main-sidebar .sidebar {
     transform: translateX(-100%) !important;
   }
   
-  /* Mobile Close Button - Visible on mobile */
-  #main-sidebar .sidebar-close-button {
-    display: flex !important;
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 1050;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    color: white;
-    font-size: 20px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  #main-sidebar .sidebar-close-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.6);
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-  
-  #main-sidebar .sidebar-close-button:active {
-    transform: scale(0.95);
-  }
-  
   /* Ensure sidebar doesn't break on mobile */
   #main-sidebar .sidebar {
     padding: 10px 8px;
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    position: relative; /* For absolute positioned close button */
   }
   
   
@@ -830,11 +792,6 @@ body.sidebar-collapse #main-sidebar .sidebar {
 </style>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4" id="main-sidebar">
-    <!-- Mobile Close Button - Only visible on mobile -->
-    <button type="button" id="sidebar-close-btn" class="sidebar-close-button" onclick="closeSidebarMobile()" aria-label="Close Sidebar" style="display: none;">
-        <i class="fas fa-times"></i>
-    </button>
-    
     <a href="<?=($giris_yapan_k->baslangic_ekrani) ? base_url($giris_yapan_k->baslangic_ekrani) : base_url("anasayfa")?>" class="brand-link" style="text-align: center;border: 2px solid rgba(255,255,255,0.2);border-radius: 12px;background: linear-gradient(135deg, #001657 0%, #002a5f 100%);padding: 12px 8px;box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
         <span style="font-size:26px;color:white;font-weight:700;letter-spacing:1px;"><strong>UG</strong> BUSINESS</span>
     </a>
@@ -1488,39 +1445,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Initial check - ensure sidebar is hidden on mobile load
     handleMobileSidebar();
-    
-    // Show/hide close button based on screen size
-    function toggleCloseButton() {
-        var closeBtn = document.getElementById('sidebar-close-btn');
-        if (closeBtn) {
-            if (window.innerWidth <= 767.98) {
-                closeBtn.style.display = 'flex';
-            } else {
-                closeBtn.style.display = 'none';
-            }
-        }
-    }
-    
-    // Initial check
-    toggleCloseButton();
-    
-    // Update on resize
-    window.addEventListener('resize', function() {
-        toggleCloseButton();
-    });
-    
-    // Close sidebar function for mobile
-    window.closeSidebarMobile = function() {
-        if (window.innerWidth <= 767.98) {
-            if (typeof $ !== 'undefined' && $.fn.pushmenu) {
-                // Use AdminLTE's pushmenu to close
-                $('[data-widget="pushmenu"]').pushmenu('toggle');
-            } else {
-                // Fallback: manually remove sidebar-open class
-                document.body.classList.remove('sidebar-open');
-            }
-        }
-    };
     
     // Handle resize - debounced
     var resizeTimeout;
