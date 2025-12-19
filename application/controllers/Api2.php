@@ -5599,4 +5599,242 @@ class Api2 extends CI_Controller
         ]);
     }
 
+    /** 57. Arvento - Araç Konumları (Harita için) */
+    public function arvento_arac_konumlari()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Anasayfa.php::get_vehicles() (satır 84-217)
+
+        $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+            <GetVehicleStatus xmlns="http://www.arvento.com/">
+            <Username>ugteknoloji1</Username>
+            <PIN1>Umexapi.2425</PIN1>
+            <PIN2>Umexapi.2425</PIN2>
+            <Language>tr</Language>
+            </GetVehicleStatus>
+        </soap:Body>
+        </soap:Envelope>';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Content-Type: text/xml; charset=utf-8",
+            "SOAPAction: \"http://www.arvento.com/GetVehicleStatus\"",
+            "Content-Length: " . strlen($soapRequest),
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+        $response = curl_exec($ch);
+        
+        if (curl_errno($ch)) {
+            curl_close($ch);
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Arvento servisine bağlanırken hata oluştu: ' . curl_error($ch)
+            ], 500);
+        }
+        curl_close($ch);
+        
+        if (empty($response)) {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Araç konumları getirildi.',
+                'data' => [],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        }
+        
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $loaded = $doc->loadXML($response);
+        
+        if (!$loaded) {
+            libxml_clear_errors();
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Araç konumları getirildi.',
+                'data' => [],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        $xpath = new DOMXPath($doc);
+        $xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+        $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
+
+        $latitudeNodes = $xpath->query("//Latitude");
+        $longitudeNodes = $xpath->query("//Longitude");
+        $deviceNodes = $xpath->query("//Device_x0020_No");
+        $speedNodes = $xpath->query("//Speed");
+
+        $locations = [];
+        for ($i = 0; $i < $latitudeNodes->length; $i++) {
+            $latitude = $latitudeNodes->item($i) ? $latitudeNodes->item($i)->nodeValue : null;
+            $longitude = $longitudeNodes->item($i) ? $longitudeNodes->item($i)->nodeValue : null;
+            $node = $deviceNodes->item($i) ? $deviceNodes->item($i)->nodeValue : null;
+            $speed = $speedNodes->item($i) ? $speedNodes->item($i)->nodeValue : 0;
+            
+            if ($latitude && $longitude) {
+                $locations[] = [
+                    "Latitude" => $latitude,
+                    "Longitude" => $longitude,
+                    "Node" => $node,
+                    "speed" => $speed
+                ];
+            }
+        }
+        
+        $pins = [];
+        foreach ($locations as $location) {
+            $lat = (float)$location["Latitude"];
+            $lng = (float)$location["Longitude"];
+            $node = $location["Node"];
+            $speed = (float)$location["speed"];
+            
+            // Sadece geçerli koordinatları ekle (0,0 olmayanlar)
+            if ($lat != 0 && $lng != 0) {
+                $pins[] = [
+                    "lat" => $lat,
+                    "lng" => $lng,
+                    "node" => $node,
+                    "speed" => $speed
+                ];
+            }
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Araç konumları başarıyla getirildi.',
+            'data' => $pins,
+            'toplam_kayit' => count($pins),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 58. Arvento - Plaka Bilgisi */
+    public function arvento_plaka_bilgisi()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Anasayfa.php::get_plaka() (satır 58-69)
+
+        $node = !empty($input_data['node']) ? trim($input_data['node']) : null;
+
+        if (empty($node)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'node parametresi gereklidir.'
+            ], 400);
+        }
+
+        $result = $this->db->where("arvento_cihaz_no", $node)->get("arvento")->result();
+        
+        if (!empty($result) && isset($result[0]->arvento_plaka)) {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Plaka bilgisi getirildi.',
+                'data' => [
+                    'node' => $node,
+                    'plaka' => $result[0]->arvento_plaka
+                ],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Plaka bilgisi bulunamadı.',
+                'data' => [
+                    'node' => $node,
+                    'plaka' => '-'
+                ],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        }
+    }
+
+    /** 59. Arvento - Sürücü Bilgisi */
+    public function arvento_surucu_bilgisi()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Anasayfa.php::get_surucu() (satır 71-82)
+
+        $node = !empty($input_data['node']) ? trim($input_data['node']) : null;
+
+        if (empty($node)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'node parametresi gereklidir.'
+            ], 400);
+        }
+
+        $result = $this->db->where("arvento_cihaz_no", $node)->get("arvento")->result();
+        
+        if (!empty($result) && isset($result[0]->arvento_surucu)) {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Sürücü bilgisi getirildi.',
+                'data' => [
+                    'node' => $node,
+                    'surucu' => $result[0]->arvento_surucu
+                ],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        } else {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Sürücü bilgisi bulunamadı.',
+                'data' => [
+                    'node' => $node,
+                    'surucu' => '-'
+                ],
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        }
+    }
+
 }
