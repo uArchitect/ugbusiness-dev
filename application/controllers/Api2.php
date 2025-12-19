@@ -4537,4 +4537,169 @@ class Api2 extends CI_Controller
         }
     }
 
+    /** 48. İl Bazlı Cihazlar - Liste */
+    public function il_bazli_cihazlar()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Cihaz.php::tumcihazlarilbazli() (satır 1545-1599)
+
+        $this->load->model('Sehir_model');
+        
+        // Filtreler
+        $cihaz_id = !empty($input_data['cihaz_id']) ? intval($input_data['cihaz_id']) : 1; // Varsayılan: 1
+        $il_id = !empty($input_data['il_id']) ? intval($input_data['il_id']) : 1; // Varsayılan: 1
+        // il_id = 9999 ise tüm iller gösterilir
+
+        // İl filtresi (9999 = tüm iller)
+        if ($il_id != 9999) {
+            $this->db->where('merkezler.merkez_il_id', $il_id);
+        }
+
+        // Sorgu oluştur
+        $this->db->where('siparis_urun_aktif', 1)
+            ->where('urunler.urun_id', $cihaz_id)
+            ->where('seri_numarasi !=', '')
+            ->select("musteriler.musteri_kayit_tarihi,
+                kullanicilar.kullanici_ad_soyad,
+                merkezler.merkez_kayit_guncelleme_notu,
+                musteriler.musteri_kayit_guncelleme_notu,
+                musteriler.musteri_ad,
+                borclu_cihazlar.borc_durum as cihaz_borc_uyarisi,
+                musteriler.musteri_id,
+                musteriler.musteri_kod,
+                musteriler.musteri_iletisim_numarasi,
+                merkezler.merkez_adi,
+                merkezler.merkez_adresi,
+                merkezler.merkez_yetkili_id,
+                merkezler.merkez_id,
+                urunler.urun_adi,
+                urunler.urun_slug,
+                siparisler.siparis_kodu,
+                siparisler.siparis_id,
+                siparis_urunleri.siparis_urun_id,
+                siparis_urunleri.musteri_degisim_aciklama,
+                siparis_urunleri.seri_numarasi,
+                siparis_urunleri.urun_iade_durum,
+                siparis_urunleri.urun_iade_tarihi,
+                siparis_urunleri.garanti_baslangic_tarihi,
+                siparis_urunleri.garanti_bitis_tarihi,
+                siparis_urunleri.siparis_urun_aktif,
+                siparis_urunleri.takas_bedeli,
+                siparis_urunleri.satis_fiyati,
+                siparis_urunleri.takas_cihaz_mi,
+                sehirler.sehir_adi,
+                sehirler.sehir_id,
+                ilceler.ilce_adi,
+                urun_renkleri.renk_adi")
+            ->order_by('garanti_bitis_tarihi', 'ASC')
+            ->join('urunler', 'urunler.urun_id = siparis_urunleri.urun_no')
+            ->join('siparisler', 'siparis_urunleri.siparis_kodu = siparisler.siparis_id')
+            ->join('merkezler', 'siparisler.merkez_no = merkezler.merkez_id')
+            ->join('musteriler', 'merkezler.merkez_yetkili_id = musteriler.musteri_id')
+            ->join('sehirler', 'merkezler.merkez_il_id = sehirler.sehir_id')
+            ->join('ilceler', 'merkezler.merkez_ilce_id = ilceler.ilce_id')
+            ->join('borclu_cihazlar', 'borclu_cihazlar.borclu_seri_numarasi = siparis_urunleri.seri_numarasi', 'left')
+            ->join('kullanicilar', 'kullanicilar.kullanici_id = musteriler.musteri_sorumlu_kullanici_id', 'left')
+            ->join('urun_renkleri', 'siparis_urunleri.renk = urun_renkleri.renk_id', 'left');
+
+        $query = $this->db->get('siparis_urunleri');
+        $results = $query->result();
+
+        // Şehirleri al (filtre için)
+        $sehirler = $this->Sehir_model->get_all();
+
+        // Verileri formatla
+        $formatted_data = [];
+        foreach ($results as $row) {
+            $formatted_data[] = [
+                'siparis_urun_id' => intval($row->siparis_urun_id),
+                'siparis' => [
+                    'siparis_id' => intval($row->siparis_id),
+                    'siparis_kodu' => $row->siparis_kodu ?? null
+                ],
+                'urun' => [
+                    'urun_id' => !empty($row->urun_id) ? intval($row->urun_id) : null,
+                    'urun_adi' => $row->urun_adi ?? null,
+                    'urun_slug' => $row->urun_slug ?? null
+                ],
+                'renk' => [
+                    'renk_id' => !empty($row->renk_id) ? intval($row->renk_id) : null,
+                    'renk_adi' => $row->renk_adi ?? null
+                ],
+                'seri_numarasi' => $row->seri_numarasi ?? null,
+                'musteri_degisim_aciklama' => $row->musteri_degisim_aciklama ?? null,
+                'urun_iade_durum' => !empty($row->urun_iade_durum) ? intval($row->urun_iade_durum) : 0,
+                'urun_iade_tarihi' => $row->urun_iade_tarihi ?? null,
+                'garanti_baslangic_tarihi' => $row->garanti_baslangic_tarihi ?? null,
+                'garanti_bitis_tarihi' => $row->garanti_bitis_tarihi ?? null,
+                'takas_bedeli' => !empty($row->takas_bedeli) ? floatval($row->takas_bedeli) : null,
+                'satis_fiyati' => !empty($row->satis_fiyati) ? floatval($row->satis_fiyati) : null,
+                'takas_cihaz_mi' => !empty($row->takas_cihaz_mi) ? intval($row->takas_cihaz_mi) : 0,
+                'cihaz_borc_uyarisi' => !empty($row->cihaz_borc_uyarisi) ? intval($row->cihaz_borc_uyarisi) : 0,
+                'musteri' => [
+                    'musteri_id' => intval($row->musteri_id),
+                    'musteri_kod' => $row->musteri_kod ?? null,
+                    'musteri_ad' => $row->musteri_ad ?? null,
+                    'musteri_iletisim_numarasi' => $row->musteri_iletisim_numarasi ?? null,
+                    'musteri_kayit_tarihi' => $row->musteri_kayit_tarihi ?? null,
+                    'musteri_kayit_guncelleme_notu' => $row->musteri_kayit_guncelleme_notu ?? null,
+                    'musteri_sorumlu_kullanici' => [
+                        'kullanici_id' => !empty($row->kullanici_id) ? intval($row->kullanici_id) : null,
+                        'kullanici_ad_soyad' => $row->kullanici_ad_soyad ?? null
+                    ]
+                ],
+                'merkez' => [
+                    'merkez_id' => intval($row->merkez_id),
+                    'merkez_adi' => $row->merkez_adi ?? null,
+                    'merkez_adresi' => $row->merkez_adresi ?? null,
+                    'merkez_yetkili_id' => !empty($row->merkez_yetkili_id) ? intval($row->merkez_yetkili_id) : null,
+                    'merkez_kayit_guncelleme_notu' => $row->merkez_kayit_guncelleme_notu ?? null
+                ],
+                'sehir' => [
+                    'sehir_id' => intval($row->sehir_id),
+                    'sehir_adi' => $row->sehir_adi ?? null
+                ],
+                'ilce' => [
+                    'ilce_id' => !empty($row->ilce_id) ? intval($row->ilce_id) : null,
+                    'ilce_adi' => $row->ilce_adi ?? null
+                ]
+            ];
+        }
+
+        // Şehirleri formatla
+        $formatted_sehirler = [];
+        foreach ($sehirler as $sehir) {
+            $formatted_sehirler[] = [
+                'sehir_id' => intval($sehir->sehir_id),
+                'sehir_adi' => $sehir->sehir_adi ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'İl bazlı cihazlar başarıyla getirildi.',
+            'data' => $formatted_data,
+            'filtreler' => [
+                'cihaz_id' => $cihaz_id,
+                'il_id' => $il_id,
+                'il_id_notu' => $il_id == 9999 ? 'Tüm iller' : 'Seçili il'
+            ],
+            'sehirler' => $formatted_sehirler,
+            'toplam_kayit' => count($formatted_data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
