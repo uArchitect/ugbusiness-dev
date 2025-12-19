@@ -38,11 +38,20 @@ function user_in($user_id, $ids) {
 }
 
 #main-sidebar .nav-icon { 
-  font-size: 12px; 
+  font-size: 16px; 
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #main-sidebar .nav-link p { 
   font-size: 13px; 
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 #main-sidebar .sidebar-input { 
@@ -210,6 +219,9 @@ function user_in($user_id, $ids) {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
 }
 
 #main-sidebar .nav-sidebar .nav-item > .nav-link::before {
@@ -255,13 +267,58 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
 #main-sidebar .nav-sidebar .nav-link .nav-icon {
   margin-right: 12px;
   width: 20px;
+  min-width: 20px;
   text-align: center;
   transition: transform 0.3s ease;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 #main-sidebar .nav-sidebar .nav-item > .nav-link:hover .nav-icon {
-  transform: scale(1.15);
+  transform: scale(1.1);
+}
+
+/* Ensure all icons are properly aligned and sized */
+#main-sidebar .nav-sidebar .nav-link i.nav-icon,
+#main-sidebar .nav-sidebar .nav-link .nav-icon i,
+#main-sidebar .nav-sidebar .nav-link i.fas,
+#main-sidebar .nav-sidebar .nav-link i.far,
+#main-sidebar .nav-sidebar .nav-link i.fa,
+#main-sidebar .nav-sidebar .nav-link i.fab {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+/* Fix icon alignment in all states */
+#main-sidebar .nav-sidebar .nav-link {
+  gap: 0;
+}
+
+#main-sidebar .nav-sidebar .nav-link > * {
+  display: flex;
+  align-items: center;
+}
+
+/* Treeview icons */
+#main-sidebar .nav-treeview .nav-link i.nav-icon,
+#main-sidebar .nav-treeview .nav-link i.fas,
+#main-sidebar .nav-treeview .nav-link i.far,
+#main-sidebar .nav-treeview .nav-link i.fa {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  font-size: 14px !important;
 }
 
 /* Nav Headers */
@@ -292,6 +349,16 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link:hover {
   font-size: 12px;
   border-radius: 6px;
   margin: 2px 6px;
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+}
+
+#main-sidebar .nav-treeview .nav-item > .nav-link .nav-icon {
+  width: 16px;
+  min-width: 16px;
+  font-size: 14px;
+  margin-right: 10px;
 }
 
 #main-sidebar .nav-treeview .nav-item > .nav-link:hover {
@@ -403,9 +470,11 @@ body.sidebar-collapse #main-sidebar .row {
 }
 
 body.sidebar-collapse #main-sidebar .nav-sidebar .nav-item > .nav-link {
-  padding: 10px !important;
+  padding: 12px !important;
   justify-content: center;
-  margin-bottom: 2px !important;
+  align-items: center;
+  margin-bottom: 4px !important;
+  min-height: 44px;
 }
 
 body.sidebar-collapse #main-sidebar .nav-sidebar .nav-link p {
@@ -414,7 +483,13 @@ body.sidebar-collapse #main-sidebar .nav-sidebar .nav-link p {
 
 body.sidebar-collapse #main-sidebar .nav-sidebar .nav-link .nav-icon {
   margin-right: 0 !important;
-  width: 20px !important;
+  margin-left: 0 !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  font-size: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 body.sidebar-collapse #main-sidebar .nav-header {
