@@ -96,7 +96,21 @@ class siparis_model extends CI_Model {
       if($has_ikinci_onay && count($where_in) > 0) {
         // Hem normal adımlar hem de 2. satış onayı bekleyen siparişler
         $this->db->group_start();
-        $this->db->where_in('adim_no', $where_in);
+        // Kullanıcı ID 9 için filter=2'de adım 4'ü özel işle
+        if($kullanici_id == 9 && in_array(4, $where_in)) {
+          // Adım 4 hariç diğer adımları dahil et
+          $adimlar_4_haric = array_diff($where_in, [4]);
+          if(!empty($adimlar_4_haric)) {
+            $this->db->where_in('adim_no', $adimlar_4_haric);
+          }
+          // Adım 4'teki ve siparis_ust_satis_onayi = 0 olan siparişleri dahil et
+          $this->db->or_group_start()
+            ->where('adim_no', 4)
+            ->where('siparis_ust_satis_onayi', 0)
+            ->group_end();
+        } else {
+          $this->db->where_in('adim_no', $where_in);
+        }
         // Adım 3'teki ve 2. satış onayı bekleyen siparişler
         $this->db->or_group_start()
           ->where('adim_no', 3)
@@ -109,7 +123,23 @@ class siparis_model extends CI_Model {
         $this->db->where('siparis_ust_satis_onayi', 0);
       } elseif(count($where_in) > 0) {
         // Normal adım filtrelemesi
-        $this->db->where_in('adim_no', $where_in);
+        // Kullanıcı ID 9 için filter=2'de adım 4'teki ve siparis_ust_satis_onayi = 0 olan siparişleri dahil et
+        if($kullanici_id == 9 && in_array(4, $where_in)) {
+          $this->db->group_start();
+          // Adım 4 hariç diğer adımları dahil et
+          $adimlar_4_haric = array_diff($where_in, [4]);
+          if(!empty($adimlar_4_haric)) {
+            $this->db->where_in('adim_no', $adimlar_4_haric);
+          }
+          // Adım 4'teki ve siparis_ust_satis_onayi = 0 olan siparişleri dahil et
+          $this->db->or_group_start()
+            ->where('adim_no', 4)
+            ->where('siparis_ust_satis_onayi', 0)
+            ->group_end();
+          $this->db->group_end();
+        } else {
+          $this->db->where_in('adim_no', $where_in);
+        }
       }
       
       $query = $this->db

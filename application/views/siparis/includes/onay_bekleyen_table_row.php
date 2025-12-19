@@ -66,10 +66,10 @@ $kullanici_yetkili_adimlar = isset($kullanici_yetkili_adimlar) ? $kullanici_yetk
 $can_approve = can_user_approve_siparis($siparis->siparis_id, $ak, $kullanici_yetkili_adimlar, $siparis);
 $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
 
-// İkinci onay kontrolü - Eğer adım 3'te ve siparis_ust_satis_onayi = 0 ise, ikinci onay bekleniyor
+// İkinci onay kontrolü - Eğer adım 3 veya 4'te ve siparis_ust_satis_onayi = 0 ise, ikinci onay bekleniyor
 $ikinci_onay_bekleniyor = false;
 $ikinci_onay_kullanici_id = null;
-if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
+if(isset($siparis->adim_no) && ($siparis->adim_no == 3 || $siparis->adim_no == 4) && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
     $ikinci_onay_bekleniyor = true;
     // siparis_ikinci_onay yetkisine sahip kullanıcıları bul
     // Kullanıcı ID 9 için her zaman yetki var
