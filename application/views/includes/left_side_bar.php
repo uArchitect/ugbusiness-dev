@@ -599,43 +599,43 @@ body.sidebar-collapse #main-sidebar .sidebar {
 
                 <li class="nav-item">
                     <a href="<?=base_url("anasayfa/rehber")?>" class="nav-link">
-                        <i class="fa fa-contact nav-icon"></i>
+                        <i class="fas fa-users nav-icon"></i>
                         <p><?=user_in($aktif_kullanici_id, [9, 7, 1, 4]) ? "PERSONEL" : "KURUMSAL İLETİŞİM"?></p>
                     </a>
                 </li>
 
                 <?php if(user_in($aktif_kullanici_id, [9, 7, 1])): ?>
-                    <?= nav_item("sablon/index/26", "ŞİRKET İÇİ KURALLAR", "fa fa-contact") ?>
+                    <?= nav_item("sablon/index/26", "ŞİRKET İÇİ KURALLAR", "fas fa-gavel") ?>
                     <li class="nav-item">
                         <a href="<?=base_url("zimmet/fabrika_zimmet")?>" class="nav-link">
-                            <i class="nav-icon fas fa-charging-station text-danger"></i>
+                            <i class="nav-icon fas fa-industry text-danger"></i>
                             <p>FABRİKA ZİMMET</p>
                         </a>
                     </li>
                 <?php endif; ?>
 
                 <?php if(user_in($aktif_kullanici_id, [1, 9, 37, 8])): ?>
-                    <?= nav_item("uretim_planlama", "ÜRETİM PLANLAMA", "fa fa-contact") ?>
+                    <?= nav_item("uretim_planlama", "ÜRETİM PLANLAMA", "fas fa-industry") ?>
                 <?php endif; ?>
 
                 <?php if(user_in($aktif_kullanici_id, [1, 9, 4])): ?>
-                    <?= nav_item("yazilim", "YAPILACAK İŞLER", "fa fa-contact") ?>
+                    <?= nav_item("yazilim", "YAPILACAK İŞLER", "fas fa-tasks") ?>
                 <?php endif; ?>
 
                 <?php if(goruntuleme_kontrol("depo_birinci_onay") || goruntuleme_kontrol("depo_giris_cikis") || user_in($aktif_kullanici_id, [1305, 11, 8, 9])): ?>
-                    <?= nav_item("depo_onay", "DEPO GİRİŞ ÇIKIŞ", "fa fa-contact") ?>
+                    <?= nav_item("depo_onay", "DEPO GİRİŞ ÇIKIŞ", "fas fa-warehouse") ?>
                 <?php endif; ?>
 
                 <?php if(user_in($aktif_kullanici_id, [1, 4, 9, 7, 8])): ?>
                     <li class="nav-item">
                         <a href="<?=base_url("cihaz/showrooms")?>" class="nav-link">
-                            <i class="fa fa-contact nav-icon"></i>
+                            <i class="fas fa-store nav-icon"></i>
                             <p style="color:orange">SHOWROOM CİHAZLAR</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?=base_url("api/kart_okutmayan_personeller_view")?>" class="nav-link">
-                            <i class="fa fa-contact nav-icon"></i>
+                            <i class="fas fa-clock nav-icon"></i>
                             <p style="font-weight:600;color:orange">MESAİ GENEL BAKIŞ</p>
                         </a>
                     </li>
@@ -644,7 +644,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                 <?php if(goruntuleme_kontrol("izinleri_yonet")): ?>
                     <li class="nav-item">
                         <a href="<?=base_url("izin")?>" class="nav-link">
-                            <i class="fa fa-contact nav-icon"></i>
+                            <i class="fas fa-calendar-alt nav-icon"></i>
                             <p style="font-weight:600;color:red">İZİN / MESAİ YÖNETİMİ</p>
                         </a>
                     </li>
@@ -653,7 +653,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                 <?php if(user_in($aktif_kullanici_id, [1338, 9])): ?>
                     <li class="nav-item">
                         <a href="<?=base_url("cihaz/tumcihazlar")?>" class="nav-link">
-                            <i class="fa fa-contact nav-icon"></i>
+                            <i class="fas fa-server nav-icon"></i>
                             <p style="color:#00fb00">TÜM CİHAZLAR</p>
                         </a>
                     </li>
@@ -671,8 +671,8 @@ body.sidebar-collapse #main-sidebar .sidebar {
                 <?= nav_header("MODÜLLER") ?>
 
                 <?php if(user_in($user_id, [40, 11, 12])): ?>
-                    <?= nav_item("zimmet/kullanici_envanter_liste", "STOK ENVANTER", "fa fa-contact") ?>
-                    <?= nav_item("siparis/haftalik_kurulum_plan", "Haftalık Kurulum Planı", "far fa-folder-open", "", "", "waiting('Haftalık Kurulum Planı')") ?>
+                    <?= nav_item("zimmet/kullanici_envanter_liste", "STOK ENVANTER", "fas fa-boxes") ?>
+                    <?= nav_item("siparis/haftalik_kurulum_plan", "Haftalık Kurulum Planı", "fas fa-calendar-week", "", "", "waiting('Haftalık Kurulum Planı')") ?>
                 <?php endif; ?>
 
                 <?php if($user_id == 40): ?>
@@ -689,7 +689,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                             <?php if(user_in($aktif_kullanici_id, [1, 9, 1330, 8])): ?>
                                 <li class="nav-item">
                                     <a href="<?=base_url("cihaz/rgmedikalindex")?>" style="background: #004e0f;" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fas fa-heartbeat nav-icon"></i>
                                         <p>RG MEDİKAL</p>
                                     </a>
                                 </li>
@@ -706,7 +706,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                             <?= nav_item("cihaz/tum-cihazlar?durum=takas", "Takas Cihazları Görüntüle", "far fa-folder-open") ?>
 
                             <?php if(goruntuleme_kontrol("borclu_cihazlari_goruntule")): ?>
-                                <?= nav_item("cihaz/borclu_cihazlar", "Borçlu Müşteriler", "far fa-circle", "text-danger") ?>
+                                <?= nav_item("cihaz/borclu_cihazlar", "Borçlu Müşteriler", "fas fa-exclamation-triangle", "text-danger") ?>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -730,12 +730,12 @@ body.sidebar-collapse #main-sidebar .sidebar {
 
                 <?php if(!user_in($user_id, [7, 9])): ?>
                     <?php if(!goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("merkezleri_goruntule")): ?>
-                        <?= nav_item("merkez", "Kargo Etiketi", "far fa-building", "text-default", "", "waiting('Merkezleri Görüntüle')") ?>
-                        <?= nav_item("servis/servis_cihaz_sorgula_view", "Atış Yükleme", "far fa-building", "text-default") ?>
+                        <?= nav_item("merkez", "Kargo Etiketi", "fas fa-shipping-fast", "text-default", "", "waiting('Merkezleri Görüntüle')") ?>
+                        <?= nav_item("servis/servis_cihaz_sorgula_view", "Atış Yükleme", "fas fa-upload", "text-default") ?>
                     <?php endif; ?>
 
                     <?php if(goruntuleme_kontrol("ilbazli_tum_cihazlari_goruntule")): ?>
-                        <?= nav_item("cihaz/tumcihazlarilbazli", "İL BAZLI CİHAZLAR", "far fa-building", "text-default") ?>
+                        <?= nav_item("cihaz/tumcihazlarilbazli", "İL BAZLI CİHAZLAR", "fas fa-map-marked-alt", "text-default") ?>
                     <?php endif; ?>
 
                     <?php if((goruntuleme_kontrol("musteri_ekle") && goruntuleme_kontrol("musterileri_goruntule")) || goruntuleme_kontrol("merkezleri_goruntule")): ?>
@@ -791,34 +791,34 @@ body.sidebar-collapse #main-sidebar .sidebar {
                         </a>
                         <ul class="nav nav-treeview">
                             <?php if(goruntuleme_kontrol("satis_limitlerini_yonet")): ?>
-                                <?= nav_item("fiyat_limit", "Satış Limitleri", "far fa-check-circle") ?>
+                                <?= nav_item("fiyat_limit", "Satış Limitleri", "fas fa-dollar-sign") ?>
                             <?php endif; ?>
 
-                            <?= nav_item("siparis/hizli_siparis_olustur_view", "Hızlı Sipariş Oluştur", "fa fa-plus", "", "", "waiting('Hızlı Sipariş Oluştur')") ?>
+                            <?= nav_item("siparis/hizli_siparis_olustur_view", "Hızlı Sipariş Oluştur", "fas fa-plus-circle", "", "", "waiting('Hızlı Sipariş Oluştur')") ?>
 
                             <?php if(goruntuleme_kontrol("siparis_beklemeye_al")): ?>
-                                <?= nav_item("onay-bekleyen-siparisler?filter=2", "Onay Bekleyen Siparişler", "far fa-check-circle", "", "", "waiting('Onay Bekleyen Siparişler')") ?>
+                                <?= nav_item("onay-bekleyen-siparisler?filter=2", "Onay Bekleyen Siparişler", "fas fa-hourglass-half", "", "", "waiting('Onay Bekleyen Siparişler')") ?>
                             <?php else: ?>
-                                <?= nav_item("onay-bekleyen-siparisler", "Onay Bekleyen Siparişler", "far fa-check-circle", "", "", "waiting('Onay Bekleyen Siparişler')") ?>
+                                <?= nav_item("onay-bekleyen-siparisler", "Onay Bekleyen Siparişler", "fas fa-hourglass-half", "", "", "waiting('Onay Bekleyen Siparişler')") ?>
                             <?php endif; ?>
 
                             <?php if($aktif_kullanici_id == 1): ?>
-                                <?= nav_item("onay-bekleyen-siparisler-copy", "O.B.S", "far fa-check-circle", "", "", "waiting('O.B.S')") ?>
+                                <?= nav_item("onay-bekleyen-siparisler-copy", "O.B.S", "fas fa-hourglass-half", "", "", "waiting('O.B.S')") ?>
                             <?php endif; ?>
 
-                            <?= nav_item("tum-siparisler", "Tüm Siparişler", "far fa-folder-open") ?>
+                            <?= nav_item("tum-siparisler", "Tüm Siparişler", "fas fa-shopping-cart") ?>
 
                             <?php if($aktif_kullanici_id == 1): ?>
                                 <?= nav_item("siparis/siparis_kisa_yollar", "Siparişler Kısa Yolları", "fas fa-bolt", "", "", "waiting('Siparişler Kısa Yolları')") ?>
                                 <?= nav_item("siparis/demo_on_izleme", "Demo Ön İzleme", "fas fa-th-large", "", "", "waiting('Demo Ön İzleme')") ?>
                             <?php endif; ?>
 
-                            <?= nav_item("siparis/haftalik_kurulum_plan", "Haftalık Kurulum Planı", "far fa-folder-open", "", "", "waiting('Haftalık Kurulum Planı')") ?>
+                            <?= nav_item("siparis/haftalik_kurulum_plan", "Haftalık Kurulum Planı", "fas fa-calendar-week", "", "", "waiting('Haftalık Kurulum Planı')") ?>
 
                             <?php if(goruntuleme_kontrol("iptal_edilen_siparisleri_goruntule")): ?>
                                 <li class="nav-item">
                                     <a href="<?=base_url("cihaz/iptal_edilen_siparisler")?>" style="border-left: 0;" class="nav-link">
-                                        <i class="fa fa-list nav-icon"></i>
+                                        <i class="fas fa-ban nav-icon"></i>
                                         <p>İptal Edilenler</p>
                                     </a>
                                 </li>
@@ -853,7 +853,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                     <?php if(goruntuleme_kontrol("sms_degerlendirme_raporunu_goruntule")): ?>
                         <li class="nav-item">
                             <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
-                                <i class="fa fa-envelope nav-icon"></i>
+                                <i class="fas fa-sms nav-icon"></i>
                                 <p>SMS Sonuçları</p>
                             </a>
                         </li>
@@ -900,7 +900,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                             <?php if(goruntuleme_kontrol("servis_goruntule")): ?>
                                 <li class="nav-item">
                                     <a href="<?=base_url("servis")?>" style="border-left: 0;" class="nav-link">
-                                        <i class="fa fa-list nav-icon text-success"></i>
+                                        <i class="fas fa-tools nav-icon text-success"></i>
                                         <p>Cihaz Teknik Servis</p>
                                     </a>
                                 </li>
@@ -908,17 +908,17 @@ body.sidebar-collapse #main-sidebar .sidebar {
 
                             <?= nav_item("baslik/isleme_alinan_basliklar", "İşleme Alınan Başlıklar", "fas fa-retweet", "", "", "waiting('İşleme Alınan Başlıklar')") ?>
                             <?= nav_item("baslik/tamamlanan_basliklar", "Tamamlanan Başlıklar", "fas fa-check", "", "", "waiting('İşleme Alınan Başlıklar')") ?>
-                            <?= nav_item("cihaz/tum-basliklar", "Başlık Tanımları", "far fa-folder-open", "", "", "waiting('Başlıkları Görüntüle')") ?>
-                            <?= nav_item("baslik/baslik_havuz_tanimla_view", "Yeni Başlık QR (Üretim)", "fa fa-plus-circle", "", "", "waiting('Yeni Başlık QR (Üretim)')") ?>
-                            <?= nav_item("baslik/baslik_havuz_liste_view", "Başlık Havuzu (Yeniler)", "fa fa-list", "", "", "waiting('Başlık Havuzu (Yeniler)')") ?>
+                            <?= nav_item("cihaz/tum-basliklar", "Başlık Tanımları", "fas fa-tags", "", "", "waiting('Başlıkları Görüntüle')") ?>
+                            <?= nav_item("baslik/baslik_havuz_tanimla_view", "Yeni Başlık QR (Üretim)", "fas fa-qrcode", "", "", "waiting('Yeni Başlık QR (Üretim)')") ?>
+                            <?= nav_item("baslik/baslik_havuz_liste_view", "Başlık Havuzu (Yeniler)", "fas fa-layer-group", "", "", "waiting('Başlık Havuzu (Yeniler)')") ?>
                             
                             <li class="nav-item">
                                 <a href="<?=base_url("stok/urungonderim")?>" class="nav-link">
-                                    <i class="fa fa-list nav-icon"></i>
+                                    <i class="fas fa-truck nav-icon"></i>
                                     <p style="color:orange">HAVA HORT. GÖNDERİM</p>
                                 </a>
                             </li>
-                            <?= nav_item("baslik/iade_etiket", "İADE ETİKETİ YAZDIR", "fa fa-list") ?>
+                            <?= nav_item("baslik/iade_etiket", "İADE ETİKETİ YAZDIR", "fas fa-print") ?>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -969,9 +969,9 @@ body.sidebar-collapse #main-sidebar .sidebar {
                             <p>ÜRETİM <i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?= nav_item("cihaz/cihaz_havuz_tanimla_view", "Yeni Cihaz Kayıt", "fa fa-plus-circle", "", "", "waiting('Yeni Başlık QR (Üretim)')") ?>
-                            <?= nav_item("cihaz/cihaz_havuz_liste_view", "Cihaz Havuzu (Stok)", "fa fa-list", "", "", "waiting('Başlık Havuzu (Yeniler)')") ?>
-                            <?= nav_item("baslik/baslik_havuz_tanimla_view", "Yeni Başlık QR (Üretim)", "fa fa-plus-circle", "", "", "waiting('Yeni Başlık QR (Üretim)')") ?>
+                            <?= nav_item("cihaz/cihaz_havuz_tanimla_view", "Yeni Cihaz Kayıt", "fas fa-plus-circle", "", "", "waiting('Yeni Başlık QR (Üretim)')") ?>
+                            <?= nav_item("cihaz/cihaz_havuz_liste_view", "Cihaz Havuzu (Stok)", "fas fa-database", "", "", "waiting('Başlık Havuzu (Yeniler)')") ?>
+                            <?= nav_item("baslik/baslik_havuz_tanimla_view", "Yeni Başlık QR (Üretim)", "fas fa-qrcode", "", "", "waiting('Yeni Başlık QR (Üretim)')") ?>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -991,13 +991,13 @@ body.sidebar-collapse #main-sidebar .sidebar {
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="<?=base_url("demirbas/ekle/1")?>" style="border-left: 0;" class="nav-link">
-                                    <i class="fa fa-plus nav-icon text-success"></i>
+                                    <i class="fas fa-plus-circle nav-icon text-success"></i>
                                     <p>Yeni Envanter Ekle</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a style="border-left: 0;" href="<?=base_url("demirbas")?>" class="nav-link">
-                                    <i class="far fa-file-alt nav-icon text-default"></i>
+                                    <i class="fas fa-clipboard-list nav-icon text-default"></i>
                                     <p>Tüm Envanterler</p>
                                 </a>
                             </li>
@@ -1018,21 +1018,21 @@ body.sidebar-collapse #main-sidebar .sidebar {
                             <p>RAPORLAR <i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?= nav_item("kullanici/muhasebe_rapor/".date("m"), "Muhasebe Rapor", "far fa-circle") ?>
-                            <?= nav_item("talep/rapor", "Talep Analiz", "far fa-circle", "", "", "waiting('Talep Raporu')") ?>
-                            <?= nav_item("talep/yogunluk_haritasi", "Talep Yoğunluk Haritası", "far fa-circle", "", "", "waiting('Talep Raporu')") ?>
-                            <?= nav_item("talep/bekleyen_rapor_list", "Bekleyen Talepler", "far fa-circle", "", "", "waiting('Yönlendirilen Talepler')") ?>
+                            <?= nav_item("kullanici/muhasebe_rapor/".date("m"), "Muhasebe Rapor", "fas fa-chart-line") ?>
+                            <?= nav_item("talep/rapor", "Talep Analiz", "fas fa-chart-bar", "", "", "waiting('Talep Raporu')") ?>
+                            <?= nav_item("talep/yogunluk_haritasi", "Talep Yoğunluk Haritası", "fas fa-map", "", "", "waiting('Talep Raporu')") ?>
+                            <?= nav_item("talep/bekleyen_rapor_list", "Bekleyen Talepler", "fas fa-hourglass-half", "", "", "waiting('Yönlendirilen Talepler')") ?>
 
                             <?php if(goruntuleme_kontrol("garanti_sorgulayanlari_goruntule")): ?>
-                                <?= nav_item("cihaz/garanti_sorgulayanlar", "Garanti Sorgulayanlar", "far fa-circle") ?>
+                                <?= nav_item("cihaz/garanti_sorgulayanlar", "Garanti Sorgulayanlar", "fas fa-shield-alt") ?>
                             <?php endif; ?>
 
-                            <?= nav_item("cihaz/cihaz_harita", "Cihaz Raporu (Harita)", "far fa-id-card", "", "", "waiting('Cihaz Raporu')") ?>
-                            <?= nav_item("cihaz/rg_medikal_cihaz_harita", "RG Cihaz Raporu (Harita)", "far fa-id-card", "", "", "waiting('Cihaz Raporu')") ?>
+                            <?= nav_item("cihaz/cihaz_harita", "Cihaz Raporu (Harita)", "fas fa-map-marked-alt", "", "", "waiting('Cihaz Raporu')") ?>
+                            <?= nav_item("cihaz/rg_medikal_cihaz_harita", "RG Cihaz Raporu (Harita)", "fas fa-map-marked-alt", "", "", "waiting('Cihaz Raporu')") ?>
                             
                             <li class="nav-item">
                                 <a href="<?=base_url("siparis/degerlendirme_rapor")?>" style="border-left: 0;" class="nav-link">
-                                    <i class="fa fa-list nav-icon"></i>
+                                    <i class="fas fa-sms nav-icon"></i>
                                     <p>SMS Sonuçları</p>
                                 </a>
                             </li>
@@ -1040,7 +1040,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                             <?php if(user_in($aktif_kullanici_id, [1, 7, 9])): ?>
                                 <li class="nav-item">
                                     <a href="<?=base_url("atis")?>" style="border-left: 0;" class="nav-link">
-                                        <i class="fa fa-list nav-icon"></i>
+                                        <i class="fas fa-bullseye nav-icon"></i>
                                         <p>Atış Raporu</p>
                                     </a>
                                 </li>
@@ -1067,7 +1067,7 @@ body.sidebar-collapse #main-sidebar .sidebar {
                 <?php endif; ?>
 
                 <?php if(goruntuleme_kontrol("sadece_kendi_teklif_formlarini_goruntule") || goruntuleme_kontrol("tum_teklif_formlarini_goruntule")): ?>
-                    <?= nav_item("teklif_form", "TEKLİF FORMLARI", "far fa-circle", "text-success") ?>
+                    <?= nav_item("teklif_form", "TEKLİF FORMLARI", "fas fa-file-invoice", "text-success") ?>
                 <?php endif; ?>
 
                 <?php if(goruntuleme_kontrol("kapi_yonetim")): ?>
@@ -1092,32 +1092,32 @@ body.sidebar-collapse #main-sidebar .sidebar {
                             <p>SİSTEM YÖNETİMİ <i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?= nav_item("kullanici", "Kullanıcılar", "fa fa-users") ?>
-                            <?= nav_item("dogum_gunu", "Doğum Günü Bildirimleri", "fa fa-calendar-check") ?>
+                            <?= nav_item("kullanici", "Kullanıcılar", "fas fa-users") ?>
+                            <?= nav_item("dogum_gunu", "Doğum Günü Bildirimleri", "fas fa-birthday-cake") ?>
                             <?= nav_item("sms_templates", "SMS Metinleri", "fas fa-sms") ?>
-                            <?= nav_item("kullanici-yetkileri", "Kullanıcı Yetkileri", "fa fa-lock") ?>
-                            <?= nav_item("urun", "Ürün", "fa fa-building") ?>
-                            <?= nav_item("departman", "Departmanlar", "fa fa-building") ?>
+                            <?= nav_item("kullanici-yetkileri", "Kullanıcı Yetkileri", "fas fa-user-shield") ?>
+                            <?= nav_item("urun", "Ürün", "fas fa-cube") ?>
+                            <?= nav_item("departman", "Departmanlar", "fas fa-sitemap") ?>
                             <?= nav_item("duyuru-kategori", "Duyuru Kategorileri", "fas fa-bullhorn") ?>
-                            <?= nav_item("istek_birim", "İstek Birimleri", "far fa-life-ring") ?>
-                            <?= nav_item("istek_kategori", "İstek Kategorileri", "far fa-life-ring") ?>
-                            <?= nav_item("is_tip", "İş Tipleri", "far fa-list-alt") ?>
-                            <?= nav_item("istek_durum", "İstek Durumları", "far fa-life-ring") ?>
-                            <?= nav_item("dokuman_kategori", "Döküman Kategorileri", "far fa-folder") ?>
-                            <?= nav_item("demirbas_kategori", "Envanter Kategorileri", "far fa-folder") ?>
-                            <?= nav_item("demirbas_birim", "Envanter Birimleri", "far fa-life-ring") ?>
-                            <?= nav_item("kullanici_grup", "Kullanıcı Grupları", "fa fa-users") ?>
-                            <?= nav_item("sehir", "İl - İlçe Bilgileri", "fa fa-map-pin") ?>
-                            <?= nav_item("yemek", "Yemek Listesi", "fa fa-envelope") ?>
-                            <?= nav_item("ayar", "Parametreler", "fa fa-envelope") ?>
+                            <?= nav_item("istek_birim", "İstek Birimleri", "fas fa-building") ?>
+                            <?= nav_item("istek_kategori", "İstek Kategorileri", "fas fa-tags") ?>
+                            <?= nav_item("is_tip", "İş Tipleri", "fas fa-tasks") ?>
+                            <?= nav_item("istek_durum", "İstek Durumları", "fas fa-info-circle") ?>
+                            <?= nav_item("dokuman_kategori", "Döküman Kategorileri", "fas fa-folder") ?>
+                            <?= nav_item("demirbas_kategori", "Envanter Kategorileri", "fas fa-folder") ?>
+                            <?= nav_item("demirbas_birim", "Envanter Birimleri", "fas fa-ruler") ?>
+                            <?= nav_item("kullanici_grup", "Kullanıcı Grupları", "fas fa-users") ?>
+                            <?= nav_item("sehir", "İl - İlçe Bilgileri", "fas fa-map-marker-alt") ?>
+                            <?= nav_item("yemek", "Yemek Listesi", "fas fa-utensils") ?>
+                            <?= nav_item("ayar", "Parametreler", "fas fa-sliders-h") ?>
                             <li class="nav-item">
                                 <a href="<?=base_url("ayar/arac_kilometre_ortalamalari")?>" class="nav-link">
                                     <i class="fas fa-tachometer-alt nav-icon"></i>
                                     <p style="font-size:12px">Araç Km Ort.</p>
                                 </a>
                             </li>
-                            <?= nav_item("ariza", "Başlık Arıza Tanımları", "fa fa-envelope") ?>
-                            <?= nav_item("logs", "Log", "fas fa-power-off", "text-success") ?>
+                            <?= nav_item("ariza", "Başlık Arıza Tanımları", "fas fa-exclamation-triangle") ?>
+                            <?= nav_item("logs", "Log", "fas fa-file-alt", "text-success") ?>
                         </ul>
                     </li>
                 <?php endif; ?>
