@@ -80,35 +80,15 @@ class siparis_model extends CI_Model {
     }
 
 
-    public function get_all_waiting($where_in, $kullanici_id = null, $has_ikinci_onay = false)
+    public function get_all_waiting($where_in, $kullanici_id = null)
     {
      
-      if(count($where_in)<=0 && !$has_ikinci_onay){
+      if(count($where_in)<=0){
         return [];
       }
       $this->db->where(["siparis_aktif"=>1]);
      
-      // Adım filtrelemesi - siparis_ikinci_onay yetkisi varsa adım 3'ü de dahil et
-      if($has_ikinci_onay && count($where_in) > 0) {
-        // Hem normal adımlar hem de 2. satış onayı bekleyen siparişler
-        $this->db->group_start();
-        $this->db->where_in('adim_no', $where_in);
-        // Adım 3'teki ve 2. satış onayı bekleyen siparişler
-        $this->db->or_group_start()
-          ->where('adim_no', 3)
-          ->where('siparis_ust_satis_onayi', 0)
-          ->group_end();
-        $this->db->group_end();
-      } elseif($has_ikinci_onay) {
-        // Sadece siparis_ikinci_onay yetkisi varsa, sadece adım 3'teki ve 2. satış onayı bekleyen siparişler
-        $this->db->where('adim_no', 3);
-        $this->db->where('siparis_ust_satis_onayi', 0);
-      } elseif(count($where_in) > 0) {
-        // Normal adım filtrelemesi
-        $this->db->where_in('adim_no', $where_in);
-      }
-      
-      $query = $this->db
+      $query = $this->db->where_in('adim_no',$where_in)
           ->select('siparisler.*,kullanicilar.kullanici_ad_soyad,kullanicilar.kullanici_id,kullanicilar.kullanici_resim, merkezler.merkez_adi,merkezler.merkez_adresi, musteriler.musteri_id,musteriler.musteri_ad,musteriler.musteri_iletisim_numarasi,musteriler.musteri_sabit_numara, sehirler.sehir_adi, ilceler.ilce_adi,siparis_onay_hareketleri.*,siparis_onay_adimlari.*')
           ->from('siparisler')
           ->join('merkezler', 'merkezler.merkez_id = siparisler.merkez_no')
@@ -130,28 +110,12 @@ class siparis_model extends CI_Model {
       // Yani: bir sonraki adım = adim_no + 1, yetki kodu = siparis_onay_{bir_sonraki_adım}
       if($kullanici_id !== null) {
           // Report sayfasındaki mantık: adim_no + 1 = bir sonraki adım, yetki kodu = siparis_onay_{adim_no+1}
-          $this->db->group_start();
           $this->db->where("EXISTS (
               SELECT 1 
               FROM kullanici_yetki_tanimlari 
               WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
                 AND kullanici_yetki_tanimlari.yetki_kodu = CONCAT('siparis_onay_', siparis_onay_hareketleri.adim_no + 1)
           )");
-          
-          // siparis_ikinci_onay yetkisi varsa, adım 3'teki ve siparis_ust_satis_onayi = 0 olan siparişleri de dahil et
-          if($has_ikinci_onay) {
-            $this->db->or_group_start()
-              ->where('adim_no', 3)
-              ->where('siparis_ust_satis_onayi', 0)
-              ->where("EXISTS (
-                  SELECT 1 
-                  FROM kullanici_yetki_tanimlari 
-                  WHERE kullanici_yetki_tanimlari.kullanici_id = " . (int)$kullanici_id . "
-                    AND kullanici_yetki_tanimlari.yetki_kodu = 'siparis_ikinci_onay'
-              )")
-              ->group_end();
-          }
-          $this->db->group_end();
       }
       
       $query = $this->db->order_by('siparisler.siparis_id', 'DESC')
