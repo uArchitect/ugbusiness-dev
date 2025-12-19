@@ -5191,4 +5191,412 @@ class Api2 extends CI_Controller
         }
     }
 
+    /** 54. Arvento - Sürücü-Node Eşleştirmeleri */
+    public function arvento_surucu_node_eslestirmeleri()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Arvento.php::index() (satır 12-99)
+
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : null;
+
+        // SOAP Request
+        $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
+    <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+      <soap:Body>
+        <GetDriverNodeMappings  xmlns="http://www.arvento.com/">
+          <Username>ugteknoloji1</Username>
+          <PIN1>Umexapi.2425</PIN1>
+          <PIN2>Umexapi.2425</PIN2>
+          <Language>tr</Language>
+        </GetDriverNodeMappings>
+      </soap:Body>
+    </soap:Envelope>';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Content-Type: text/xml; charset=utf-8",
+            "SOAPAction: \"http://www.arvento.com/GetDriverNodeMappings\"",
+            "Content-Length: " . strlen($soapRequest),
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+        $response = curl_exec($ch);
+        
+        if (curl_errno($ch)) {
+            curl_close($ch);
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Arvento servisine bağlanırken hata oluştu: ' . curl_error($ch)
+            ], 500);
+        }
+        curl_close($ch);
+        
+        if (empty($response)) {
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Sürücü-node eşleştirmeleri getirildi.',
+                'data' => [],
+                'arac_bilgisi' => null,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        }
+        
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $loaded = $doc->loadXML($response);
+        
+        if (!$loaded) {
+            libxml_clear_errors();
+            $this->jsonResponse([
+                'status' => 'success',
+                'message' => 'Sürücü-node eşleştirmeleri getirildi.',
+                'data' => [],
+                'arac_bilgisi' => null,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        $xpath = new DOMXPath($doc);
+        $xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+        $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
+        $latitudeNodes = $xpath->query("//Driver"); 
+        $latitudeNodes2 = $xpath->query("//Device_x0020_No"); 
+        $driverdata = [];
+        
+        for ($i = 0; $i < $latitudeNodes->length; $i++) { 
+            if ($latitudeNodes->item($i) && $latitudeNodes2->item($i)) {
+                $driverdata[] = [
+                    "driver" => $latitudeNodes->item($i)->nodeValue,
+                    "node" => $latitudeNodes2->item($i)->nodeValue
+                ];
+            }
+        }
+
+        // Kullanıcının aracını al
+        $arac_bilgisi = null;
+        if ($kullanici_id) {
+            $arac_result = $this->db->where("arac_surucu_id", $kullanici_id)->get("araclar")->result();
+            if (!empty($arac_result)) {
+                $arac = $arac_result[0];
+                $arac_bilgisi = [
+                    'arac_id' => intval($arac->arac_id),
+                    'arac_plaka' => $arac->arac_plaka ?? null,
+                    'arac_arvento_key' => $arac->arac_arvento_key ?? null
+                ];
+            }
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Sürücü-node eşleştirmeleri başarıyla getirildi.',
+            'data' => $driverdata,
+            'arac_bilgisi' => $arac_bilgisi,
+            'toplam_kayit' => count($driverdata),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 55. Arvento - Yakıt Bilgileri */
+    public function arvento_yakit_bilgileri()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Arvento.php::get_yakit() (satır 102-165)
+
+        $node = !empty($input_data['node']) ? trim($input_data['node']) : null;
+        $baslangic_tarihi = !empty($input_data['baslangic_tarihi']) ? trim($input_data['baslangic_tarihi']) : null;
+        $bitis_tarihi = !empty($input_data['bitis_tarihi']) ? trim($input_data['bitis_tarihi']) : null;
+
+        if (empty($node)) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'node gereklidir.'
+            ], 400);
+        }
+
+        // Tarih formatını dönüştür (Y-m-d H:i:s -> mdYHis)
+        if (empty($baslangic_tarihi)) {
+            $baslangic_tarihi = date('mdYHis', strtotime('-7 days'));
+        } else {
+            $baslangic_tarihi = date('mdYHis', strtotime($baslangic_tarihi));
+        }
+
+        if (empty($bitis_tarihi)) {
+            $bitis_tarihi = date('mdYHis');
+        } else {
+            $bitis_tarihi = date('mdYHis', strtotime($bitis_tarihi));
+        }
+
+        $url = "https://ws.arvento.com/v1/report.asmx";
+        $request = '<?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                      xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                      xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+            <CanBusFuelInfo xmlns="http://www.arvento.com/">
+                <Username>ugteknoloji1</Username>
+              <PIN1>Umexapi.2425</PIN1>
+              <PIN2>Umexapi.2425</PIN2>
+              <StartDate>' . $baslangic_tarihi . '</StartDate>
+              <EndDate>' . $bitis_tarihi . '</EndDate>
+              <Node>' . htmlspecialchars($node) . '</Node>
+              <Group></Group>
+              <Compress>false</Compress>
+              <MinuteDif>0</MinuteDif>
+              <Language></Language>
+            </CanBusFuelInfo>
+          </soap:Body>
+        </soap:Envelope>';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Content-Type: text/xml; charset=utf-8",
+            "SOAPAction: \"http://www.arvento.com/CanBusFuelInfo\"",
+            "Content-Length: " . strlen($request)
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        
+        $response = curl_exec($ch);
+        
+        if (curl_errno($ch)) {
+            curl_close($ch);
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Arvento servisine bağlanırken hata oluştu: ' . curl_error($ch)
+            ], 500);
+        }
+        
+        curl_close($ch);
+
+        $xml = @simplexml_load_string($response);
+        
+        if (!$xml) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Arvento servisinden geçersiz yanıt alındı.'
+            ], 500);
+        }
+
+        $xml->registerXPathNamespace('soap', 'http://schemas.xmlsoap.org/soap/envelope/');
+        $xml->registerXPathNamespace('diffgr', 'urn:schemas-microsoft-com:xml-diffgram-v1');
+        $xml->registerXPathNamespace('msdata', 'urn:schemas-microsoft-com:xml-msdata');
+        $xml->registerXPathNamespace('arvento', 'http://www.arvento.com/');
+        $records = $xml->xpath('//diffgr:diffgram/NewDataSet/Table1');
+
+        $data = [];
+        if ($records) {
+            foreach ($records as $record) {
+                $data[] = [
+                    'kayit_no' => isset($record->{'Kayıt_x0020_No'}) ? (string) $record->{'Kayıt_x0020_No'} : null,
+                    'cihaz' => isset($record->Cihaz) ? (string) $record->Cihaz : null,
+                    'plaka' => isset($record->Plaka) ? (string) $record->Plaka : null,
+                    'surucu' => isset($record->Sürücü) ? (string) $record->Sürücü : 'N/A',
+                    'tarih_saat' => isset($record->{'Tarih_x002F_Saat'}) ? (string) $record->{'Tarih_x002F_Saat'} : null,
+                    'durum' => isset($record->Durum) ? (string) $record->Durum : null,
+                    'deger' => isset($record->Değer) ? (string) $record->Değer : null,
+                    'odometre' => isset($record->Odometre) ? (string) $record->Odometre : null
+                ];
+            }
+        }
+
+        // Araçları al
+        $araclar = $this->db->where("arac_arvento_key !=", "")->get("araclar")->result();
+        $formatted_araclar = [];
+        foreach ($araclar as $arac) {
+            $formatted_araclar[] = [
+                'arac_id' => intval($arac->arac_id),
+                'arac_plaka' => $arac->arac_plaka ?? null,
+                'arac_arvento_key' => $arac->arac_arvento_key ?? null
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Yakıt bilgileri başarıyla getirildi.',
+            'data' => $data,
+            'araclar' => $formatted_araclar,
+            'filtreler' => [
+                'node' => $node,
+                'baslangic_tarihi' => $baslangic_tarihi,
+                'bitis_tarihi' => $bitis_tarihi
+            ],
+            'toplam_kayit' => count($data),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
+    /** 56. Arvento - Hız Uyarıları */
+    public function arvento_hiz_uyarilari()
+    {
+        $method = $this->input->method(true);
+        
+        if (in_array($method, ['POST', 'GET'])) {
+            $input_data = ($method === 'POST') 
+                ? json_decode(file_get_contents('php://input'), true) ?? []
+                : $this->input->get();
+        } else {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Sadece POST veya GET metodu kabul edilir.'
+            ], 405);
+        }
+
+        // Controller Referansı: Arvento.php::get_speed_alarm_data() (satır 167-249)
+
+        $node = !empty($input_data['node']) ? trim($input_data['node']) : 'K1200007333';
+        $baslangic_tarihi = !empty($input_data['baslangic_tarihi']) ? trim($input_data['baslangic_tarihi']) : null;
+        $bitis_tarihi = !empty($input_data['bitis_tarihi']) ? trim($input_data['bitis_tarihi']) : null;
+        $group = !empty($input_data['group']) ? intval($input_data['group']) : 0;
+
+        // Tarih formatını dönüştür (Y-m-d H:i:s -> mdYHis)
+        if (empty($baslangic_tarihi)) {
+            $now = new DateTime();
+            $now->modify('-15 minutes');
+            $baslangic_tarihi = $now->format('mdYHis');
+        } else {
+            $baslangic_tarihi = date('mdYHis', strtotime($baslangic_tarihi));
+        }
+
+        if (empty($bitis_tarihi)) {
+            $now = new DateTime();
+            $bitis_tarihi = $now->format('mdYHis');
+        } else {
+            $bitis_tarihi = date('mdYHis', strtotime($bitis_tarihi));
+        }
+
+        $soapRequest = '<?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+            <SpeedAlarm xmlns="http://www.arvento.com/">
+              <Username>ugteknoloji1</Username>
+              <PIN1>Umexapi.2425</PIN1>
+              <PIN2>Umexapi.2425</PIN2>
+              <StartDate>' . $baslangic_tarihi . '</StartDate>
+              <EndDate>' . $bitis_tarihi . '</EndDate>
+              <Node>' . htmlspecialchars($node) . '</Node>
+              <Group>' . $group . '</Group>
+              <Compress>0</Compress>
+              <Locale>0</Locale>
+              <Language>1</Language>
+              <Duration>0</Duration>
+            </SpeedAlarm>
+          </soap:Body>
+        </soap:Envelope>';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://ws.arvento.com/v1/report.asmx");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $soapRequest);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Content-Type: text/xml; charset=utf-8",
+            "SOAPAction: \"http://www.arvento.com/SpeedAlarm\"",
+            "Content-Length: " . strlen($soapRequest),
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            curl_close($ch);
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Arvento servisine bağlanırken hata oluştu: ' . curl_error($ch)
+            ], 500);
+        }
+
+        curl_close($ch);
+
+        $doc = new DOMDocument();
+        $loaded = @$doc->loadXML($response);
+        
+        if (!$loaded) {
+            $this->jsonResponse([
+                'status'  => 'error',
+                'message' => 'Arvento servisinden geçersiz yanıt alındı.'
+            ], 500);
+        }
+
+        $xpath = new DOMXPath($doc);
+        $xpath->registerNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+        $xpath->registerNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
+            
+        $drivers = $xpath->query("//Driver");
+        $plakas = $xpath->query("//License_x0020_Plate");
+        $devices = $xpath->query("//Device_x0020_No");
+        $dates = $xpath->query("//Date_x002F_Time");
+        $limits = $xpath->query("//Speed_x0020_Limit");
+        $speeds = $xpath->query("//Speed_x0020_km_x002F_h");
+        $adresses = $xpath->query("//Address");
+        $durations = $xpath->query("//Speed_x0020_Violation_x0020_Duration");
+
+        $result = [];
+        for ($i = 0; $i < $devices->length; $i++) {   
+            $result[] = [
+                'device_no' => $devices->item($i) ? (string)$devices->item($i)->nodeValue : null,
+                'license_plate' => $plakas->item($i) ? (string)$plakas->item($i)->nodeValue : null,
+                'driver' => $drivers->item($i) ? (string)$drivers->item($i)->nodeValue : null,
+                'date' => $dates->item($i) ? (string)$dates->item($i)->nodeValue : null,
+                'limit' => $limits->item($i) ? (string)$limits->item($i)->nodeValue : null,
+                'speed' => $speeds->item($i) ? (string)$speeds->item($i)->nodeValue : null,
+                'duration' => $durations->item($i) ? (string)$durations->item($i)->nodeValue : null,
+                'address' => $adresses->item($i) ? (string)$adresses->item($i)->nodeValue : null,
+            ];
+        }
+
+        $this->jsonResponse([
+            'status' => 'success',
+            'message' => 'Hız uyarıları başarıyla getirildi.',
+            'data' => $result,
+            'filtreler' => [
+                'node' => $node,
+                'baslangic_tarihi' => $baslangic_tarihi,
+                'bitis_tarihi' => $bitis_tarihi,
+                'group' => $group
+            ],
+            'toplam_kayit' => count($result),
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+    }
+
 }
