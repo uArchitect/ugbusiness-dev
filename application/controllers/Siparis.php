@@ -261,13 +261,20 @@ class Siparis extends CI_Controller {
 		// Kullanıcının yetkili olduğu adımları al
 		$kullanici_yetkili_adimlar = $this->_get_kullanici_yetkili_adimlar($current_user_id);
 		
+		// siparis_ikinci_onay yetkisi var mı kontrol et
+		$has_ikinci_onay = $this->db
+			->where('kullanici_id', $current_user_id)
+			->where('yetki_kodu', 'siparis_ikinci_onay')
+			->get('kullanici_yetki_tanimlari')
+			->num_rows() > 0;
+		
 		// Filtre adımlarını belirle
 		$filter = $this->_get_filter_adimlari($tum_siparisler_tabi, $kullanici_yetkili_adimlar);
 		
 		// Model'e kullanıcı ID'sini gönder (sadece onay sırası gelen siparişleri getirmek için)
 		// Tüm Siparişler tabında (filter=3) kullanıcı filtresi uygulanmaz
 		$kullanici_id_filtre = $tum_siparisler_tabi ? null : $current_user_id;
-		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter, $kullanici_id_filtre);
+		$viewData["onay_bekleyen_siparisler"] = $this->Siparis_model->get_all_waiting($filter, $kullanici_id_filtre, $has_ikinci_onay);
 		$viewData["kullanici_yetkili_adimlar"] = $kullanici_yetkili_adimlar;
 		$viewData["page"] = $view_path;
 
