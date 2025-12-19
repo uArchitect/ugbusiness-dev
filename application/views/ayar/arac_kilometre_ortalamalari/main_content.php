@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- Bilgi Yazısı -->
-                <div class="alert alert-info" style="background-color: #e7f3ff; border-left: 4px solid #2196F3; border-radius: 4px; padding: 15px; margin-bottom: 20px;">
+                <div class="alert alert-info" style="border-left: 4px solid #2196F3; border-radius: 4px; padding: 15px; margin-bottom: 20px;">
                     <i class="fas fa-info-circle" style="color: #2196F3; margin-right: 8px;"></i>
                     <strong>Bilgi:</strong> Bu tablo, seçilen 12 ay için araç sahiplerinin aylık ortalama kilometre değerlerini göstermektedir. Her ay için, o ay içindeki ilk ve son kilometre kayıtları arasındaki fark hesaplanarak ortalama değer bulunmaktadır. "Genel Ortalama" sütunu, seçilen dönem için tüm ayların ortalamasını göstermektedir.
                 </div>
