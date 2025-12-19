@@ -65,6 +65,25 @@ $onay_bekleniyor = ($data[0]->adim_sira_numarasi == 4 && $siparis->siparis_ust_s
 $kullanici_yetkili_adimlar = isset($kullanici_yetkili_adimlar) ? $kullanici_yetkili_adimlar : [];
 $can_approve = can_user_approve_siparis($siparis->siparis_id, $ak, $kullanici_yetkili_adimlar, $siparis);
 $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
+
+// İkinci onay kontrolü - Eğer adım 3'te ve siparis_ust_satis_onayi = 0 ise, ikinci onay bekleniyor
+$ikinci_onay_bekleniyor = false;
+$ikinci_onay_kullanici_id = null;
+if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi == 0) {
+    $ikinci_onay_bekleniyor = true;
+    // siparis_ikinci_onay yetkisine sahip kullanıcıları bul
+    $ikinci_onay_kullanicilar = $this->db
+        ->select('kullanici_id')
+        ->from('kullanici_yetki_tanimlari')
+        ->where('yetki_kodu', 'siparis_ikinci_onay')
+        ->get()
+        ->result();
+    
+    if(!empty($ikinci_onay_kullanicilar)) {
+        // İlk kullanıcının ID'sini al (birden fazla varsa ilkini göster)
+        $ikinci_onay_kullanici_id = $ikinci_onay_kullanicilar[0]->kullanici_id;
+    }
+}
 ?>
 
 <tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>">
@@ -80,6 +99,11 @@ $next_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no + 1 : null;
                     <i class="fas fa-check"></i> GEÇERLİ
                 </span>
                 <small style="font-size: 9px; color: #666; font-weight: bold;">Adım <?= $siparis->adim_no + 1 ?></small>
+                <?php if($ikinci_onay_bekleniyor && $ikinci_onay_kullanici_id !== null): ?>
+                    <small style="font-size: 8px; color: #dc3545; font-weight: bold; display: block; margin-top: 2px;">
+                        <i class="fas fa-user-check"></i> 2. Onay: ID <?= $ikinci_onay_kullanici_id ?>
+                    </small>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </td> 
