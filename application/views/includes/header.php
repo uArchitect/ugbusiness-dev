@@ -18,6 +18,120 @@
       50% { opacity: 0; }
       }
   </style>
+  <style>
+    /* Bakım Modu Bildirimi */
+    .maintenance-toast {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      z-index: 9999;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      color: white;
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      min-width: 380px;
+      max-width: 450px;
+      animation: slideInRight 0.5s ease-out, maintenanceBlink 2s ease-in-out infinite;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      border-left: 4px solid #fff;
+    }
+    
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes maintenanceBlink {
+      0%, 100% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+      50% {
+        box-shadow: 0 8px 32px rgba(255, 107, 107, 0.6), 0 0 20px rgba(255, 107, 107, 0.4);
+      }
+    }
+    
+    .maintenance-toast-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    
+    .maintenance-toast-icon {
+      margin-right: 10px;
+      font-size: 20px;
+      animation: iconPulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes iconPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+    
+    .maintenance-toast-message {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      opacity: 0.95;
+    }
+    
+    .maintenance-countdown {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 10px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .maintenance-countdown-item {
+      display: inline-block;
+      margin: 0 8px;
+      text-align: center;
+    }
+    
+    .maintenance-countdown-label {
+      font-size: 10px;
+      font-weight: 500;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    
+    .maintenance-countdown-separator {
+      font-size: 18px;
+      opacity: 0.7;
+      margin: 0 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .maintenance-toast {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+        max-width: none;
+        top: 60px;
+      }
+    }
+  </style>
 
 
 
@@ -214,6 +328,72 @@ foreach ($aracidler as $id) {
       </li>
 
     </ul>
+    
+    <!-- Bakım Modu Bildirimi -->
+    <div id="maintenance-toast" class="maintenance-toast">
+      <div class="maintenance-toast-header">
+        <i class="fas fa-tools maintenance-toast-icon"></i>
+        <span>Bakım Modu Bildirimi</span>
+      </div>
+      <div class="maintenance-toast-message">
+        Bakım modu başlayacaktır. Lütfen aşağıdaki süre içerisinde bugünlük işlemlerinizi tamamlayın.
+      </div>
+      <div class="maintenance-countdown" id="maintenance-countdown">
+        <div class="maintenance-countdown-item">
+          <div id="countdown-hours">00</div>
+          <div class="maintenance-countdown-label">Saat</div>
+        </div>
+        <span class="maintenance-countdown-separator">:</span>
+        <div class="maintenance-countdown-item">
+          <div id="countdown-minutes">00</div>
+          <div class="maintenance-countdown-label">Dakika</div>
+        </div>
+        <span class="maintenance-countdown-separator">:</span>
+        <div class="maintenance-countdown-item">
+          <div id="countdown-seconds">00</div>
+          <div class="maintenance-countdown-label">Saniye</div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      (function() {
+        // Bakım modu başlangıç zamanı (şu an + 4 saat)
+        const maintenanceStartTime = new Date();
+        maintenanceStartTime.setHours(maintenanceStartTime.getHours() + 4);
+        
+        const countdownElement = document.getElementById('maintenance-countdown');
+        const hoursElement = document.getElementById('countdown-hours');
+        const minutesElement = document.getElementById('countdown-minutes');
+        const secondsElement = document.getElementById('countdown-seconds');
+        
+        function updateCountdown() {
+          const now = new Date();
+          const timeLeft = maintenanceStartTime - now;
+          
+          if (timeLeft <= 0) {
+            hoursElement.textContent = '00';
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+            return;
+          }
+          
+          const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+          const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+          
+          hoursElement.textContent = String(hours).padStart(2, '0');
+          minutesElement.textContent = String(minutes).padStart(2, '0');
+          secondsElement.textContent = String(seconds).padStart(2, '0');
+        }
+        
+        // İlk güncelleme
+        updateCountdown();
+        
+        // Her saniye güncelle
+        setInterval(updateCountdown, 1000);
+      })();
+    </script>
   </nav>
   <a class="btn btn-dark btn-sm d-block d-lg-none mnav"   style="
     width: -webkit-fill-available;border-radius:0px!important;
