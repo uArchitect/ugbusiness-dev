@@ -485,7 +485,7 @@ class Api2 extends CI_Controller
         $input_data = json_decode(file_get_contents('php://input'), true) ?? [];
         
         // Kullanıcı ID'sini al (hem user_id hem kullanici_id destekle)
-        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : null);
+        $kullanici_id = !empty($input_data['kullanici_id']) ? intval($input_data['kullanici_id']) : (!empty($input_data['user_id']) ? intval($input_data['user_id']) : 0); // null yerine 0
         
         // Gerekli alanları kontrol et
         if (empty($kullanici_id) || empty($input_data['merkez_id']) || empty($input_data['urunler']) || !is_array($input_data['urunler'])) {
@@ -573,36 +573,36 @@ class Api2 extends CI_Controller
         foreach ($input_data['urunler'] as $urun) {
             // Field name normalizasyonu - farklı field name'leri destekle
             $urun_no = intval($urun['urun_no'] ?? $urun['urun_id'] ?? 0);
-            $renk = !empty($urun['renk']) ? intval($urun['renk']) : null;
+            $renk = !empty($urun['renk']) ? intval($urun['renk']) : 0;
             $odeme_secenek = intval($urun['odeme_secenek'] ?? $urun['odeme_secenegi'] ?? 1);
             $vade_sayisi = intval($urun['vade_sayisi'] ?? 0);
-            $damla_etiket = isset($urun['damla_etiket']) ? intval($urun['damla_etiket']) : null;
-            $acilis_ekrani = isset($urun['acilis_ekrani']) ? intval($urun['acilis_ekrani']) : null;
+            $damla_etiket = isset($urun['damla_etiket']) ? intval($urun['damla_etiket']) : 0;
+            $acilis_ekrani = isset($urun['acilis_ekrani']) ? intval($urun['acilis_ekrani']) : 0;
             $yenilenmis_cihaz_mi = isset($urun['yenilenmis_cihaz_mi']) ? intval($urun['yenilenmis_cihaz_mi']) : 0;
             $para_birimi = !empty($urun['para_birimi']) ? trim($urun['para_birimi']) : 'TRY';
             
             // Hediye no - 0, "0", null, boş string kontrolü
             $hediye_no_raw = $urun['hediye_no'] ?? $urun['hediye_id'] ?? null;
-            $hediye_no = null;
+            $hediye_no = 0;
             if ($hediye_no_raw !== null && $hediye_no_raw !== '' && $hediye_no_raw !== '0' && $hediye_no_raw !== 0) {
                 $hediye_no = intval($hediye_no_raw);
             }
             
             // Takas alanları - "0", 0, null, boş string kontrolü
             $takas_alinan_model_raw = $urun['takas_alinan_model'] ?? $urun['takas_model'] ?? null;
-            $takas_alinan_model = null;
+            $takas_alinan_model = '';
             if (!empty($takas_alinan_model_raw) && $takas_alinan_model_raw !== '0' && $takas_alinan_model_raw !== 0) {
                 $takas_alinan_model = trim($takas_alinan_model_raw);
             }
             
             $takas_alinan_seri_kod_raw = $urun['takas_alinan_seri_kod'] ?? $urun['takas_seri_kod'] ?? $urun['takas_seri_no'] ?? null;
-            $takas_alinan_seri_kod = null;
+            $takas_alinan_seri_kod = '';
             if (!empty($takas_alinan_seri_kod_raw) && $takas_alinan_seri_kod_raw !== '0' && $takas_alinan_seri_kod_raw !== 0) {
                 $takas_alinan_seri_kod = trim($takas_alinan_seri_kod_raw);
             }
             
             $takas_alinan_renk_raw = $urun['takas_alinan_renk'] ?? $urun['takas_renk'] ?? null;
-            $takas_alinan_renk = null;
+            $takas_alinan_renk = '';
             if (!empty($takas_alinan_renk_raw) && $takas_alinan_renk_raw !== '0' && $takas_alinan_renk_raw !== 0) {
                 $takas_alinan_renk = trim($takas_alinan_renk_raw);
             }
@@ -615,21 +615,19 @@ class Api2 extends CI_Controller
             $takas_bedeli = str_replace([',', '₺', ' ', 'TL'], '', $urun['takas_bedeli'] ?? $urun['takas_fiyati'] ?? '0');
             
             // Başlıklar - array kontrolü (Siparis controller'daki mantığa göre JSON string olarak kaydedilir)
-            $basliklar = null;
+            $basliklar = '';
             $basliklar_raw = $urun['basliklar'] ?? $urun['baslik'] ?? null;
             if (!empty($basliklar_raw)) {
-                // Eğer zaten JSON string ise direkt kullan
                 if (is_string($basliklar_raw) && json_decode($basliklar_raw) !== null) {
                     $basliklar = $basliklar_raw;
                 } elseif (is_array($basliklar_raw) && count($basliklar_raw) > 0) {
-                    // Array ise JSON string'e çevir (Siparis controller'daki mantık)
                     $basliklar = json_encode($basliklar_raw);
                 }
             }
             
             // Sipariş notu - farklı field name'ler
             $siparis_notu_raw = $urun['siparis_notu'] ?? $urun['siparis_urun_notu'] ?? $urun['not'] ?? $urun['aciklama'] ?? null;
-            $siparis_urun_notu = null;
+            $siparis_urun_notu = '';
             if (!empty($siparis_notu_raw)) {
                 $siparis_urun_notu = strip_tags(trim($siparis_notu_raw));
             }
@@ -643,24 +641,24 @@ class Api2 extends CI_Controller
             $siparis_urun_data = [
                 'siparis_kodu' => $siparis_id,
                 'urun_no' => $urun_no,
-                'satis_fiyati' => $satis_fiyati,
-                'pesinat_fiyati' => $pesinat_fiyati,
-                'kapora_fiyati' => $kapora_fiyati,
-                'fatura_tutari' => $fatura_tutari,
-                'takas_bedeli' => $takas_bedeli,
-                'takas_alinan_seri_kod' => $takas_alinan_seri_kod,
-                'takas_alinan_model' => $takas_alinan_model,
-                'takas_alinan_renk' => $takas_alinan_renk,
-                'renk' => $renk,
-                'odeme_secenek' => $odeme_secenek,
-                'vade_sayisi' => $vade_sayisi,
-                'damla_etiket' => $damla_etiket,
-                'acilis_ekrani' => $acilis_ekrani,
-                'yenilenmis_cihaz_mi' => $yenilenmis_cihaz_mi,
+                'satis_fiyati' => $satis_fiyati !== '' ? $satis_fiyati : 0,
+                'pesinat_fiyati' => $pesinat_fiyati !== '' ? $pesinat_fiyati : 0,
+                'kapora_fiyati' => $kapora_fiyati !== '' ? $kapora_fiyati : 0,
+                'fatura_tutari' => $fatura_tutari !== '' ? $fatura_tutari : 0,
+                'takas_bedeli' => $takas_bedeli !== '' ? $takas_bedeli : 0,
+                'takas_alinan_seri_kod' => $takas_alinan_seri_kod !== '' ? $takas_alinan_seri_kod : 0,
+                'takas_alinan_model' => $takas_alinan_model !== '' ? $takas_alinan_model : 0,
+                'takas_alinan_renk' => $takas_alinan_renk !== '' ? $takas_alinan_renk : 0,
+                'renk' => $renk !== 0 ? $renk : 0,
+                'odeme_secenek' => $odeme_secenek !== 0 ? $odeme_secenek : 0,
+                'vade_sayisi' => $vade_sayisi !== 0 ? $vade_sayisi : 0,
+                'damla_etiket' => $damla_etiket !== 0 ? $damla_etiket : 0,
+                'acilis_ekrani' => $acilis_ekrani !== 0 ? $acilis_ekrani : 0,
+                'yenilenmis_cihaz_mi' => $yenilenmis_cihaz_mi !== 0 ? $yenilenmis_cihaz_mi : 0,
                 'para_birimi' => $para_birimi,
-                'hediye_no' => $hediye_no,
-                'basliklar' => $basliklar,
-                'siparis_urun_notu' => $siparis_urun_notu,
+                'hediye_no' => $hediye_no !== 0 ? $hediye_no : 0,
+                'basliklar' => $basliklar !== '' ? $basliklar : 0,
+                'siparis_urun_notu' => $siparis_urun_notu !== '' ? $siparis_urun_notu : 0,
                 'siparis_urun_aktif' => 1  // Ürünün aktif olduğunu belirt
             ];
             
@@ -767,7 +765,7 @@ class Api2 extends CI_Controller
         }
         
         // Müdüre bildirim gönder (ID 9 - müdür)
-        $this->_siparis_bildirimi_gonder($siparis_id, $siparis_kodu, $url, 9, $kullanici_id);
+       // $this->_siparis_bildirimi_gonder($siparis_id, $siparis_kodu, $url, 9, $kullanici_id);
 
         $this->jsonResponse([
             'status' => 'success',
