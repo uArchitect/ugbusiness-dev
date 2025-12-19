@@ -101,7 +101,7 @@ if(isset($siparis->adim_no) && $siparis->adim_no == 3 && isset($siparis->siparis
 }
 ?>
 
-<tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>">
+<tr style="cursor:pointer;" onclick="showWindow2('<?= $link ?>');" data-siparis-id="<?= $siparis->siparis_id ?>" <?php if($ikinci_onay_bekleniyor && $ikinci_onay_kullanici_id !== null): ?>class="special_4_adim"<?php endif; ?>>
     <td style="text-align: left; vertical-align: middle;">
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
             <b style="font-size: 13px;">#<?= $siparis->siparis_id ?></b>
