@@ -85,6 +85,7 @@
       line-height: 1.3;
       margin-bottom: 8px;
       opacity: 0.95;
+      color: white !important;
     }
     
     .maintenance-countdown {
@@ -122,86 +123,135 @@
       margin: 0 1px;
     }
     
-    /* Mobil için responsive ayarlar */
+    /* Mobil için tam ekran overlay */
     @media (max-width: 768px) {
       .maintenance-toast {
-        right: 8px;
-        left: 8px;
-        top: 55px;
-        min-width: auto;
-        max-width: none;
-        padding: 8px 10px;
-        border-radius: 6px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100vh;
+        min-width: 100%;
+        max-width: 100%;
+        padding: 40px 20px;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        box-shadow: none;
+      }
+      
+      /* Mobilde tüm tıklamaları engelle */
+      .maintenance-toast::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background: rgba(0, 0, 0, 0.3);
+      }
+      
+      body.maintenance-active {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        touch-action: none;
+      }
+      
+      body.maintenance-active *:not(.maintenance-toast):not(.maintenance-toast *) {
+        pointer-events: none !important;
+        user-select: none !important;
+      }
+      
+      body.maintenance-active .maintenance-toast,
+      body.maintenance-active .maintenance-toast * {
+        pointer-events: auto !important;
+        user-select: text !important;
       }
       
       .maintenance-toast-header {
-        font-size: 10px;
-        margin-bottom: 4px;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: white;
+        text-align: center;
       }
       
       .maintenance-toast-icon {
-        font-size: 10px;
-        margin-right: 5px;
+        font-size: 24px;
+        margin-right: 8px;
       }
       
       .maintenance-toast-message {
-        font-size: 9px;
-        line-height: 1.2;
-        margin-bottom: 6px;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: white !important;
+        text-align: center;
+        font-weight: bold;
       }
       
       .maintenance-countdown {
-        padding: 5px;
-        font-size: 9px;
-        margin-top: 3px;
-        border-radius: 4px;
+        padding: 10px;
+        font-size: 14px;
+        margin-top: 20px;
+        border-radius: 6px;
       }
       
       .maintenance-countdown-item {
-        margin: 0 2px;
+        margin: 0 4px;
       }
       
       .maintenance-countdown-label {
-        font-size: 6px;
-        margin-top: 1px;
+        font-size: 10px;
+        margin-top: 4px;
       }
       
       .maintenance-countdown-separator {
-        font-size: 9px;
-        margin: 0 1px;
+        font-size: 14px;
+        margin: 0 2px;
       }
     }
     
     /* Çok küçük ekranlar için */
     @media (max-width: 480px) {
       .maintenance-toast {
-        top: 50px;
-        padding: 6px 8px;
+        padding: 30px 15px;
       }
       
       .maintenance-toast-header {
-        font-size: 9px;
+        font-size: 16px;
+        margin-bottom: 15px;
       }
       
       .maintenance-toast-icon {
-        font-size: 9px;
+        font-size: 20px;
       }
       
       .maintenance-toast-message {
-        font-size: 8px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: white !important;
       }
       
       .maintenance-countdown {
-        font-size: 8px;
-        padding: 4px;
+        font-size: 12px;
+        padding: 8px;
       }
       
       .maintenance-countdown-label {
-        font-size: 5px;
+        font-size: 8px;
       }
       
       .maintenance-countdown-separator {
-        font-size: 8px;
+        font-size: 12px;
       }
     }
   </style>
@@ -408,7 +458,7 @@ foreach ($aracidler as $id) {
         <i class="fas fa-tools maintenance-toast-icon"></i>
         <span>Bakım Modu</span>
       </div>
-      <div class="maintenance-toast-message" style="font-weight:bold; color:#ff3d3d;">
+      <div class="maintenance-toast-message" style="font-weight:bold; color:white !important;">
         DİKKAT: Bakım işlemleri BAŞLAMIŞTIR!<br>
         Şu andan itibaren yapacağınız hiçbir işlem veya veri kaydedilmeyecektir.<br>
         Lütfen acil bir işlem gerçekleştirmeyin ve bakım bitene kadar sistemde değişiklik yapmayınız!
@@ -423,3 +473,57 @@ foreach ($aracidler as $id) {
 "><i class="fas fa-sign-out-alt"></i> Oturumu Sonlandır</a>
 
   <!-- /.navbar -->
+  
+  <script>
+    // Mobilde bakım modu bildirimi varsa tıklamaları engelle
+    (function() {
+      var maintenanceToast = document.getElementById('maintenance-toast');
+      if (maintenanceToast) {
+        function checkMobile() {
+          var isMobile = window.innerWidth <= 768;
+          if (isMobile) {
+            // Body'ye class ekle
+            document.body.classList.add('maintenance-active');
+            
+            // Scroll'u engelle
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+            
+            // Tüm tıklama olaylarını engelle (maintenance-toast hariç)
+            document.addEventListener('click', function(e) {
+              if (!e.target.closest('.maintenance-toast')) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+              }
+            }, true);
+            
+            document.addEventListener('touchstart', function(e) {
+              if (!e.target.closest('.maintenance-toast')) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+              }
+            }, true);
+            
+            document.addEventListener('touchend', function(e) {
+              if (!e.target.closest('.maintenance-toast')) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+              }
+            }, true);
+          }
+        }
+        
+        // Sayfa yüklendiğinde kontrol et
+        checkMobile();
+        
+        // Ekran boyutu değiştiğinde kontrol et
+        window.addEventListener('resize', checkMobile);
+      }
+    })();
+  </script>
