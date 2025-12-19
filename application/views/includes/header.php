@@ -452,8 +452,9 @@ foreach ($aracidler as $id) {
 
     </ul>
     
-    <!-- Bakım Modu Bildirimi -->
-    <div id="maintenance-toast" class="maintenance-toast">
+    <!-- Bakım Modu Bildirimi (Kullanıcı ID 1 hariç) -->
+    <?php if(aktif_kullanici()->kullanici_id != 1): ?>
+    <div id="maintenance-toast" class="maintenance-toast" data-user-id="<?= aktif_kullanici()->kullanici_id ?>">
       <div class="maintenance-toast-header">
         <i class="fas fa-tools maintenance-toast-icon"></i>
         <span>Bakım Modu</span>
@@ -464,6 +465,7 @@ foreach ($aracidler as $id) {
         Lütfen acil bir işlem gerçekleştirmeyin ve bakım bitene kadar sistemde değişiklik yapmayınız!
       </div>
     </div>
+    <?php endif; ?>
   </nav>
   <a class="btn btn-dark btn-sm d-block d-lg-none mnav"   style="
     width: -webkit-fill-available;border-radius:0px!important;
@@ -475,10 +477,17 @@ foreach ($aracidler as $id) {
   <!-- /.navbar -->
   
   <script>
-    // Mobilde bakım modu bildirimi varsa tıklamaları engelle
+    // Mobilde bakım modu bildirimi varsa tıklamaları engelle (Kullanıcı ID 1 hariç)
     (function() {
       var maintenanceToast = document.getElementById('maintenance-toast');
       if (maintenanceToast) {
+        // Kullanıcı ID kontrolü
+        var userId = maintenanceToast.getAttribute('data-user-id');
+        if (userId === '1') {
+          // Kullanıcı ID 1 ise hiçbir engel uygulanmasın
+          return;
+        }
+        
         function checkMobile() {
           var isMobile = window.innerWidth <= 768;
           if (isMobile) {
