@@ -191,27 +191,9 @@ if($adim_4_ikinci_onay_bekliyor) {
     </td>
     <td style="width: 140px; white-space: nowrap; vertical-align: middle;">
         <div style="display: flex; flex-direction: column; gap: 6px; align-items: stretch;">
-            <?php if($onay_bekleniyor): ?>
-                <button type="button" style="padding: 7px 10px; font-size: 10px; border: 1px solid #5b4002; font-weight: 500; opacity:0.5; width: 100%; white-space: nowrap;" class="btn btn-danger btn-xs" disabled>
-                    <i class="fas fa-clock"></i> ONAY BEKLENİYOR
-                </button>
-            <?php else: ?>
-                <a type="button" style="padding: 7px 10px; font-size: 10px; border: 1px solid #5b4002; font-weight: 500; width: 100%; text-align: center; display: block; white-space: nowrap;" onclick="event.stopPropagation(); showWindow2('<?= $link ?>');" class="btn btn-warning btn-xs">
-                    <i class="fas fa-search"></i> GÖRÜNTÜLE
-                </a>
-            <?php endif; ?>
-            
-            <?php if($can_approve && !$onay_bekleniyor): ?>
-                <form action="<?= base_url("siparis/onayla/" . $siparis->siparis_id) ?>" method="post" style="margin: 0; width: 100%;" onsubmit="event.stopPropagation(); return confirmOnay('<?= $siparis->siparis_id ?>', '<?= $next_adim ?>');" onclick="event.stopPropagation();">
-                    <button type="submit" class="btn btn-success btn-xs" style="padding: 7px 10px; font-size: 10px; font-weight: 500; width: 100%; white-space: nowrap;" title="Adım <?= $next_adim ?> Onayı" onclick="event.stopPropagation();">
-                        <i class="fas fa-check-circle"></i> ONAYLA
-                    </button>
-                </form>
-            <?php elseif(!$onay_bekleniyor): ?>
-                <span class="text-muted" style="font-size: 9px; text-align: center; display: block; padding: 4px 2px;">
-                    <i class="fas fa-info-circle"></i> Yetki Yok
-                </span>
-            <?php endif; ?>
+            <a type="button" style="padding: 7px 10px; font-size: 10px; border: 1px solid #5b4002; font-weight: 500; width: 100%; text-align: center; display: block; white-space: nowrap;" onclick="event.stopPropagation(); showWindow2('<?= $link ?>');" class="btn btn-warning btn-xs">
+                <i class="fas fa-search"></i> GÖRÜNTÜLE
+            </a>
         </div>
     </td>
 </tr>
