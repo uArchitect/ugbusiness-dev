@@ -27,11 +27,11 @@
       z-index: 9999;
       background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
       color: white;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 8px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-      min-width: 280px;
-      max-width: 320px;
+      min-width: 240px;
+      max-width: 280px;
       animation: slideInRight 0.5s ease-out, maintenanceBlink 2s ease-in-out infinite;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       border-left: 3px solid #fff;
@@ -60,14 +60,14 @@
     .maintenance-toast-header {
       display: flex;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
     }
     
     .maintenance-toast-icon {
-      margin-right: 8px;
-      font-size: 14px;
+      margin-right: 6px;
+      font-size: 12px;
       animation: iconPulse 1.5s ease-in-out infinite;
     }
     
@@ -81,9 +81,9 @@
     }
     
     .maintenance-toast-message {
-      font-size: 11px;
-      line-height: 1.4;
-      margin-bottom: 10px;
+      font-size: 10px;
+      line-height: 1.3;
+      margin-bottom: 8px;
       opacity: 0.95;
     }
     
@@ -92,43 +92,116 @@
       align-items: center;
       justify-content: center;
       background: rgba(255, 255, 255, 0.2);
-      padding: 8px;
-      border-radius: 6px;
-      font-size: 13px;
+      padding: 6px;
+      border-radius: 5px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-top: 6px;
+      letter-spacing: 0.3px;
+      margin-top: 4px;
       backdrop-filter: blur(10px);
     }
     
     .maintenance-countdown-item {
       display: inline-block;
-      margin: 0 4px;
+      margin: 0 3px;
       text-align: center;
     }
     
     .maintenance-countdown-label {
-      font-size: 8px;
+      font-size: 7px;
       font-weight: 500;
       opacity: 0.8;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
       margin-top: 2px;
     }
     
     .maintenance-countdown-separator {
-      font-size: 13px;
+      font-size: 11px;
       opacity: 0.7;
-      margin: 0 2px;
+      margin: 0 1px;
     }
     
+    /* Mobil için responsive ayarlar */
     @media (max-width: 768px) {
       .maintenance-toast {
-        right: 10px;
-        left: 10px;
+        right: 8px;
+        left: 8px;
+        top: 55px;
         min-width: auto;
         max-width: none;
-        top: 60px;
+        padding: 8px 10px;
+        border-radius: 6px;
+      }
+      
+      .maintenance-toast-header {
+        font-size: 10px;
+        margin-bottom: 4px;
+      }
+      
+      .maintenance-toast-icon {
+        font-size: 10px;
+        margin-right: 5px;
+      }
+      
+      .maintenance-toast-message {
+        font-size: 9px;
+        line-height: 1.2;
+        margin-bottom: 6px;
+      }
+      
+      .maintenance-countdown {
+        padding: 5px;
+        font-size: 9px;
+        margin-top: 3px;
+        border-radius: 4px;
+      }
+      
+      .maintenance-countdown-item {
+        margin: 0 2px;
+      }
+      
+      .maintenance-countdown-label {
+        font-size: 6px;
+        margin-top: 1px;
+      }
+      
+      .maintenance-countdown-separator {
+        font-size: 9px;
+        margin: 0 1px;
+      }
+    }
+    
+    /* Çok küçük ekranlar için */
+    @media (max-width: 480px) {
+      .maintenance-toast {
+        top: 50px;
+        padding: 6px 8px;
+      }
+      
+      .maintenance-toast-header {
+        font-size: 9px;
+      }
+      
+      .maintenance-toast-icon {
+        font-size: 9px;
+      }
+      
+      .maintenance-toast-message {
+        font-size: 8px;
+      }
+      
+      .maintenance-countdown {
+        font-size: 8px;
+        padding: 4px;
+      }
+      
+      .maintenance-countdown-label {
+        font-size: 5px;
+      }
+      
+      .maintenance-countdown-separator {
+        font-size: 8px;
       }
     }
   </style>
