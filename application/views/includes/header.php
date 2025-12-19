@@ -408,64 +408,12 @@ foreach ($aracidler as $id) {
         <i class="fas fa-tools maintenance-toast-icon"></i>
         <span>Bakım Modu</span>
       </div>
-      <div class="maintenance-toast-message">
-        Bakım modu başlayacaktır. Lütfen aşağıdaki süre içerisinde bugünlük işlemlerinizi tamamlayın.
-      </div>
-      <div class="maintenance-countdown" id="maintenance-countdown">
-        <div class="maintenance-countdown-item">
-          <div id="countdown-hours">00</div>
-          <div class="maintenance-countdown-label">Saat</div>
-        </div>
-        <span class="maintenance-countdown-separator">:</span>
-        <div class="maintenance-countdown-item">
-          <div id="countdown-minutes">00</div>
-          <div class="maintenance-countdown-label">Dakika</div>
-        </div>
-        <span class="maintenance-countdown-separator">:</span>
-        <div class="maintenance-countdown-item">
-          <div id="countdown-seconds">00</div>
-          <div class="maintenance-countdown-label">Saniye</div>
-        </div>
+      <div class="maintenance-toast-message" style="font-weight:bold; color:#ff3d3d;">
+        DİKKAT: Bakım işlemleri BAŞLAMIŞTIR!<br>
+        Şu andan itibaren yapacağınız hiçbir işlem veya veri kaydedilmeyecektir.<br>
+        Lütfen acil bir işlem gerçekleştirmeyin ve bakım bitene kadar sistemde değişiklik yapmayınız!
       </div>
     </div>
-    
-    <script>
-      (function() {
-        // Bakım modu başlangıç zamanı: 19.12.2025 saat 20:00
-        const maintenanceStartTime = new Date('2025-12-19T20:00:00');
-        
-        const countdownElement = document.getElementById('maintenance-countdown');
-        const hoursElement = document.getElementById('countdown-hours');
-        const minutesElement = document.getElementById('countdown-minutes');
-        const secondsElement = document.getElementById('countdown-seconds');
-        
-        function updateCountdown() {
-          const now = new Date();
-          const timeLeft = maintenanceStartTime - now;
-          
-          if (timeLeft <= 0) {
-            hoursElement.textContent = '00';
-            minutesElement.textContent = '00';
-            secondsElement.textContent = '00';
-            return;
-          }
-          
-          const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-          const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-          
-          hoursElement.textContent = String(hours).padStart(2, '0');
-          minutesElement.textContent = String(minutes).padStart(2, '0');
-          secondsElement.textContent = String(seconds).padStart(2, '0');
-        }
-        
-        // İlk güncelleme
-        updateCountdown();
-        
-        // Her saniye güncelle
-        setInterval(updateCountdown, 1000);
-      })();
-    </script>
   </nav>
   <a class="btn btn-dark btn-sm d-block d-lg-none mnav"   style="
     width: -webkit-fill-available;border-radius:0px!important;
