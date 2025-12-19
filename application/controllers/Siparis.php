@@ -325,6 +325,11 @@ class Siparis extends CI_Controller {
 	{
 		if($tum_siparisler_tabi) {
 			// Tüm adımları getir (1-11)
+			// Kullanıcı ID 9 için adım 4'ü çıkar
+			$current_user_id = $this->session->userdata('aktif_kullanici_id');
+			if($current_user_id == 9) {
+				return [1, 2, 3, 5, 6, 7, 8, 9, 10, 11]; // Adım 4 çıkarıldı
+			}
 			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 		}
 		
