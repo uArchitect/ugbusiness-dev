@@ -34,28 +34,34 @@ if (!function_exists('should_show_siparis_row')) {
                 // Kullanıcı 9: Report sayfasındaki mantıkla uyumlu
                 // Eğer siparis_onay_3 yetkisi varsa, adım 2'deki siparişleri onaylayabilir
                 // Adım 3'teki siparişleri görebilir (3.1 adımını görmek için)
-                $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
-                $siparis_ust_satis_onayi = isset($siparis->siparis_ust_satis_onayi) ? (int)$siparis->siparis_ust_satis_onayi : null;
-                
-                // Filter=3 (Tüm Siparişler) tabında adım 4'teki siparişleri gizle
-                if ($tum_siparisler_tabi && $current_adim === 4) {
-                    return false;
-                }
-                
-                // Filter=2 (Onay Bekleyenler) tabında adım 4'teki "Özel değil" olan siparişleri gizle
-                // Sadece "2. Onay" yazısı olan (siparis_ust_satis_onayi = 0) adım 4'teki siparişleri göster
-                if (!$tum_siparisler_tabi && $current_adim === 4) {
-                    if ($siparis_ust_satis_onayi !== 0) {
-                        return false; // "Özel değil" olanlar gizlenecek
+                if ($data && isset($data[0])) {
+                    $adim_id = isset($data[0]->adim_id) ? (int)$data[0]->adim_id : null;
+                    $adim_sira = isset($data[0]->adim_sira_numarasi) ? (int)$data[0]->adim_sira_numarasi : null;
+                    $current_adim = isset($siparis->adim_no) ? (int)$siparis->adim_no : null;
+                    $siparis_ust_satis_onayi = isset($siparis->siparis_ust_satis_onayi) ? (int)$siparis->siparis_ust_satis_onayi : null;
+                    
+                    // Filter=3 (Tüm Siparişler) tabında adım 4'teki siparişleri gizle
+                    if ($tum_siparisler_tabi && ($adim_id === 4 || $adim_sira === 4 || $current_adim === 4)) {
+                        return false;
+                    }
+                    
+                    // Filter=2 (Onay Bekleyenler) tabında adım 4'teki "Özel değil" olan siparişleri gizle
+                    // Sadece "2. Onay" yazısı olan (siparis_ust_satis_onayi = 0) veya hiçbir şey yazmayan (null) adım 4'teki siparişleri göster
+                    if (!$tum_siparisler_tabi && $current_adim === 4) {
+                        // siparis_ust_satis_onayi set edilmiş ve 0 değilse → "Özel değil" yazısı var, gizle
+                        if (isset($siparis->siparis_ust_satis_onayi) && $siparis_ust_satis_onayi !== 0) {
+                            return false; // "Özel değil" olanlar gizlenecek
+                        }
+                        // siparis_ust_satis_onayi = 0 ise → "ÖZEL" yazısı var, göster
+                        // siparis_ust_satis_onayi null ise → hiçbir şey yazmıyor, göster
+                    }
+                    
+                    // Adım 2'deki siparişleri göster (Report sayfasındaki mantıkla uyumlu - siparis_onay_3 yetkisi ile)
+                    // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
+                    if ($current_adim === 2 || $current_adim === 3) {
+                        return true;
                     }
                 }
-                
-                // Adım 2'deki siparişleri göster (Report sayfasındaki mantıkla uyumlu - siparis_onay_3 yetkisi ile)
-                // Adım 3'teki siparişleri göster (3.1 adımını görmek için)
-                if ($current_adim === 2 || $current_adim === 3) {
-                    return true;
-                }
-                
                 // Diğer adımlardaki siparişleri göster
                 return true;
             }

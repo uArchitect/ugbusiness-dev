@@ -118,7 +118,7 @@ if(isset($siparis->adim_no) && ($siparis->adim_no == 3 || $siparis->adim_no == 4
                     <small style="font-size: 8px; color: #dc3545; font-weight: bold; display: block; margin-top: 2px;">
                         <i class="fas fa-user-check"></i> 2. Onay: ID <?= $ikinci_onay_kullanici_id ?> ÖZEL
                     </small>
-                <?php elseif(isset($siparis->adim_no) && $siparis->adim_no == 4): ?>
+                <?php elseif(isset($siparis->adim_no) && $siparis->adim_no == 4 && isset($siparis->siparis_ust_satis_onayi) && $siparis->siparis_ust_satis_onayi != 0): ?>
                     <small style="font-size: 8px; color: #999; font-weight: bold; display: block; margin-top: 2px;">
                         Özel değil
                     </small>
