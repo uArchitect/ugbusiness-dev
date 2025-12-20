@@ -571,6 +571,9 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 			
 		
 
+		print_r($id);
+		return;
+
 
 
 		$hareketler =  $this->Siparis_model->get_all_actions_by_order_id($id);
