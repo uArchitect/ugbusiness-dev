@@ -571,11 +571,6 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 			
 		
 
-		print_r($id);
-		return;
-
-
-
 		$hareketler =  $this->Siparis_model->get_all_actions_by_order_id($id);
 		$guncel_adim = $hareketler[count($hareketler)-1]->adim_no+1;
 		$urunler =  $this->Siparis_model->get_all_products_by_order_id($id);
@@ -584,7 +579,7 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 
 		if($guncel_adim == 3){
 			
-			if($currentuser->kullanici_id != 1 && $currentuser->kullanici_id != $siparis[0]->siparisi_olusturan_kullanici){
+			if($currentuser->kullanici_id != 1 && $currentuser->kullanici_id != 9 && $currentuser->kullanici_id != $siparis[0]->siparisi_olusturan_kullanici){
 				$kullanici_data_siparis = $this->Kullanici_model->get_by_id($siparis[0]->siparisi_olusturan_kullanici); 
 				if($kullanici_data_siparis[0]->kullanici_yonetici_kullanici_id != $currentuser->kullanici_id){
 					$this->session->set_flashdata('flashDanger', "Bu siparişin satış onayını verme yetkiniz bulunmamaktadır.");
@@ -633,7 +628,7 @@ $viewData['hediyeler'] = $this->db->get("siparis_hediyeler")->result();
 		if($guncel_adim == 12){
 			 
 			$aktifk = aktif_kullanici()->kullanici_id;
-			if($aktifk != 1){
+			if($aktifk != 1 && $aktifk != 9){
 				if(json_decode($siparis[0]->egitim_ekip)[0] != $aktifk){
 					$this->session->set_flashdata('flashDanger', "Bu sipariş eğitim onayını sadece eğitime giden kişi verebilir. Eğitime giden kişi ile iletişime geçiniz.");
 					redirect(site_url('siparis/report/'.urlencode(base64_encode("Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE".$id."Gg3TGGUcv29CpA8aUcpwV2KdjCz8aE"))));
